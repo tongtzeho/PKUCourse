@@ -2,4 +2,4 @@
 
 编译环境：VC6
 
-运行环境：Windows（当时用的还是XP）
+运行环境：Windows（最好是XP）
