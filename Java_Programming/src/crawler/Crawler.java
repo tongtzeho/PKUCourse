@@ -11,7 +11,7 @@ import javax.swing.*;
 
 /**
  *  程序名：Crawler
- *  作者：北大信科计算机系11级唐子豪(1100012773)、北大信科计算机系11级骆宇冲(1100012778)
+ *  作者：---------------------------------
  *  编译环境：Microsoft Windows 7(64-bit)下的NetBeans IDE 7.3
  *  源文件：Crawler.java, DownloadPage.java, Parser.java, SameFileName.java, TxtFileFilter.java, Work.java
  *  功能：
@@ -365,7 +365,7 @@ public class Crawler extends JApplet {
     /* 主函数 */
     public static void main(String[] args) {
         JApplet applet = new Crawler();
-        System.out.println("欢迎使用java版网络爬虫Crawler\n作者：北大信科 - 唐子豪&骆宇冲");
+        System.out.println("欢迎使用java版网络爬虫Crawler");
         applet.init();
         applet.start();
     }
