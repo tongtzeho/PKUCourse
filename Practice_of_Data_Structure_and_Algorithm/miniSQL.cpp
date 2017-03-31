@@ -1,44 +1,44 @@
 /*
- * ÏîÄ¿£ºminiSQL
- * ÈÕÆÚ£º2012.12.30
- * ×é³¤£ºÍõÐÄâù
- * ×éÔ±£ºÌÆ×ÓºÀ¡¢»ÆÔª¡¢ÎÄÊÀÎª¡¢ÀîÓîçù¡¢ÔÀË¼ÑÔ
- * ±àÒë»·¾³£ºMicrosoft Visual C++ 6.0
- * ¹¦ÄÜ£º
- * 1. »ù±¾¹¦ÄÜ£ºSELECTÓï¾ä£¨Ö§³ÖDISTINCT¡¢WHERE¡¢INNER JOIN¡¢ORDER BY¡¢INÓï¾äºÍSELECTÇ¶Ì×£©¡¢INSERTÓï¾ä¡¢DELETEÓï¾ä¡¢UPDATEÓï¾ä
- * 2. À©Õ¹¹¦ÄÜ£ºCREATEÓï¾ä¡¢DROPÓï¾ä
- * 3. ¶Ô´ó¹æÄ£ÎÄ¼þµÄ¶ÁÐ´ºÍÍâ²¿ÅÅÐò
- * 4. ¶ÔÓï¾äÓï·¨´íÎó¡¢±í´ïÊ½Óï·¨´íÎóµÈÅÐ´í
- * ³ÌÐòÁ÷³Ì£º
- * 1. ³õÊ¼»¯´°¿Ú£¬²¢ÊäÈëSQLÃüÁîÎÄ¼þµÄÎÄ¼þÃûÒÔ¼°´æ´¢Êý¾Ý¿âµÄÎÄ¼þ¼Ð
- * 2. ÖðÌõ¶ÁÈëSQLÃüÁî²¢½øÐÐ´¦Àí
- *  (1)SELECTÓï¾ä
- *    ¢ÙÏÈÕÒµ½FROM¹Ø¼ü×Ö£¬È·¶¨ÒªÕÒµÄ±í¸ñ£¬Èç¹ûÊÇ¶à¸ö±íÔòÁ¬½ÓÆðÀ´
- *    ¢ÚÔÙ¿´ÊÇ·ñÓÐJOIN¹Ø¼ü×Ö£¬Èç¹ûÓÐ£¬Ôò½«ºóÃæµÄ±í¸ñÁ¬½ÓÆðÀ´£¨Èç¹ûJOIN¹Ø¼ü×ÖºóÃæ¸ú×ÅON¹Ø¼ü×Ö£¬ÔòÁ¬½ÓÊ±¿¼ÂÇON¹Ø¼ü×ÖµÄºóÃæµÄÌõ¼þ£©
- *    ¢ÛÈ»ºóÕÒWHERE¹Ø¼ü×Ö£¬¶ÔWHEREµÄ±í´ïÊ½½øÐÐ¼ÆËã£¨Í¨¹ý½«ÖÐ×º±í´ïÊ½×ª»¯³Éºó×º±í´ïÊ½½øÐÐ¼ÆËã£©£¬Ö»Ñ¡È¡·ûºÏÌõ¼þµÄÐÐ
- *    ¢Ü½Ó×Å¿´ÊÇ·ñÓÐORDER BY¹Ø¼ü×Ö£¬Èç¹ûÓÐ£¬Ôò¸ù¾ÝÒªÇó½øÐÐÍâ²¿ÅÅÐò£¨ÏÈ¶ÔÒ»¶¨´óÐ¡·¶Î§ÄÚµÄÊý¾Ý½øÐÐ¿ìËÙÅÅÐò£¬²¢½«ÓÐÐòµÄÎÄ¼þÊä³öµ½Ó²ÅÌÉÏ£¬
- *      ÔÙÖØÐÂ¶ÁÈë½øÐÐ¶àÂ·¹é²¢ÅÅÐò£©
- *    ¢Ý×îºóÑ¡È¡²éÑ¯µÄÁÐ£¬Èç¹ûÓÐDISTINCT¹Ø¼ü×ÖÔòÌÞ³ýÖØ¸´µÄÐÐ
- *  (2)INSERTÓï¾ä
- *    ¢ÙÏÈÕÒµ½INTO¹Ø¼ü×Ö£¬È·¶¨ÒªÔö¼ÓÊý¾ÝµÄ±í¸ñ
- *    ¢ÚÈ»ºóÈ·¶¨Ôö¼ÓµÄÊý¾ÝËùÔÚµÄÁÐ
- *    ¢Û×îºóÈ·¶¨Ôö¼ÓµÄÊý¾Ý£¬²¢Ôö¼ÓÔÚ¶ÔÓ¦µÄ±í¸ñÉÏ£¨ÐÞ¸ÄÎÄ¼þ£©
- *  (3)DELETEÓï¾ä
- *    ¢ÙÏÈÕÒµ½FROM¹Ø¼ü×Ö£¬È·¶¨ÒªÉ¾³ýÊý¾ÝµÄ±í¸ñ
- *    ¢ÚÔÙ¿´ÊÇ·ñÓÐWHERE¹Ø¼ü×Ö£¬Èç¹ûÃ»ÓÐ£¬ÔòÉ¾³ýÈ«²¿ÐÐ£¬·ñÔò½øÐÐÏÂÒ»²½
- *    ¢Û¼ÆËãWHEREµÄ±í´ïÊ½£¬½«·ûºÏÌõ¼þµÄÐÐÉ¾³ý£¨²Ù×÷Ê±Êµ¼ÊÉÏÊÇ½«²»·ûºÏÌõ¼þµÄÐÐ±£Áô£©
- *  (4)UPDATEÓï¾ä
- *    ¢ÙÏÈÕÒµ½UPDATE¹Ø¼ü×Ö£¬È·¶¨Òª¸üÐÂÊý¾ÝµÄ±í¸ñ
- *    ¢ÚÔÙÕÒSET¹Ø¼ü×Ö£¬È·¶¨Òª¸üÐÂÊý¾ÝµÄÁÐºÍ¶ÔÓ¦µÄÊý¾Ý
- *    ¢ÛÔÙÕÒWHERE¹Ø¼ü×Ö£¬½«·ûºÏÌõ¼þµÄÐÐµÄÊý¾Ý¸üÐÂ
- *  (5)CREATEÓï¾ä
- *    ¢ÙÏÈÕÒµ½TABLE¹Ø¼ü×Ö£¬È·¶¨ÒªÔö¼ÓµÄ±í¸ñµÄÃû³Æ
- *    ¢ÚÈ·¶¨¸Ã±í¸ñµÄ¸÷ÁÐµÄ±êÌâÃû³Æ¼°Êý¾ÝÀàÐÍ
- *  (6)DROPÓï¾ä
- *    ¢ÙÕÒµ½TABLE¹Ø¼ü×Ö£¬È·¶¨ÒªÉ¾³ýµÄ±í¸ñµÄÃû³Æ£¬ÔÚÓ²ÅÌÖÐÉ¾³ý¸Ã±í¸ñ
- * ²âÊÔ·½·¨£º
- * Ä¿Â¼ÏÂÓÐDB1¡¢DB2¡¢DB3Èý¸ö´æ´¢Êý¾Ý¿âµÄÎÄ¼þ¼ÐºÍsql_command_1.txt¡¢sql_command_2.txt¡¢sql_command_3.txtÈý¸öSQLÃüÁîÎÄ¼þ£¬
- * Èý¸öÎÄ¼þ¼ÐºÍÈý¸öSQLÃüÁîÎÄ¼þ·Ö±ðÒ»Ò»¶ÔÓ¦£¬ÔÚ±àÒëÆ÷ÏÂÔËÐÐ±¾³ÌÐòºó£¬ÊäÈësql_command_1.txtºÍDB1\¼´¿É£¨2ºÍ3Í¬Àí£©
+ * é¡¹ç›®ï¼šminiSQL
+ * æ—¥æœŸï¼š2012.12.30
+ * ç»„é•¿ï¼š-------
+ * ç»„å‘˜ï¼š-------
+ * ç¼–è¯‘çŽ¯å¢ƒï¼šMicrosoft Visual C++ 6.0
+ * åŠŸèƒ½ï¼š
+ * 1. åŸºæœ¬åŠŸèƒ½ï¼šSELECTè¯­å¥ï¼ˆæ”¯æŒDISTINCTã€WHEREã€INNER JOINã€ORDER BYã€INè¯­å¥å’ŒSELECTåµŒå¥—ï¼‰ã€INSERTè¯­å¥ã€DELETEè¯­å¥ã€UPDATEè¯­å¥
+ * 2. æ‰©å±•åŠŸèƒ½ï¼šCREATEè¯­å¥ã€DROPè¯­å¥
+ * 3. å¯¹å¤§è§„æ¨¡æ–‡ä»¶çš„è¯»å†™å’Œå¤–éƒ¨æŽ’åº
+ * 4. å¯¹è¯­å¥è¯­æ³•é”™è¯¯ã€è¡¨è¾¾å¼è¯­æ³•é”™è¯¯ç­‰åˆ¤é”™
+ * ç¨‹åºæµç¨‹ï¼š
+ * 1. åˆå§‹åŒ–çª—å£ï¼Œå¹¶è¾“å…¥SQLå‘½ä»¤æ–‡ä»¶çš„æ–‡ä»¶åä»¥åŠå­˜å‚¨æ•°æ®åº“çš„æ–‡ä»¶å¤¹
+ * 2. é€æ¡è¯»å…¥SQLå‘½ä»¤å¹¶è¿›è¡Œå¤„ç†
+ *  (1)SELECTè¯­å¥
+ *    â‘ å…ˆæ‰¾åˆ°FROMå…³é”®å­—ï¼Œç¡®å®šè¦æ‰¾çš„è¡¨æ ¼ï¼Œå¦‚æžœæ˜¯å¤šä¸ªè¡¨åˆ™è¿žæŽ¥èµ·æ¥
+ *    â‘¡å†çœ‹æ˜¯å¦æœ‰JOINå…³é”®å­—ï¼Œå¦‚æžœæœ‰ï¼Œåˆ™å°†åŽé¢çš„è¡¨æ ¼è¿žæŽ¥èµ·æ¥ï¼ˆå¦‚æžœJOINå…³é”®å­—åŽé¢è·Ÿç€ONå…³é”®å­—ï¼Œåˆ™è¿žæŽ¥æ—¶è€ƒè™‘ONå…³é”®å­—çš„åŽé¢çš„æ¡ä»¶ï¼‰
+ *    â‘¢ç„¶åŽæ‰¾WHEREå…³é”®å­—ï¼Œå¯¹WHEREçš„è¡¨è¾¾å¼è¿›è¡Œè®¡ç®—ï¼ˆé€šè¿‡å°†ä¸­ç¼€è¡¨è¾¾å¼è½¬åŒ–æˆåŽç¼€è¡¨è¾¾å¼è¿›è¡Œè®¡ç®—ï¼‰ï¼Œåªé€‰å–ç¬¦åˆæ¡ä»¶çš„è¡Œ
+ *    â‘£æŽ¥ç€çœ‹æ˜¯å¦æœ‰ORDER BYå…³é”®å­—ï¼Œå¦‚æžœæœ‰ï¼Œåˆ™æ ¹æ®è¦æ±‚è¿›è¡Œå¤–éƒ¨æŽ’åºï¼ˆå…ˆå¯¹ä¸€å®šå¤§å°èŒƒå›´å†…çš„æ•°æ®è¿›è¡Œå¿«é€ŸæŽ’åºï¼Œå¹¶å°†æœ‰åºçš„æ–‡ä»¶è¾“å‡ºåˆ°ç¡¬ç›˜ä¸Šï¼Œ
+ *      å†é‡æ–°è¯»å…¥è¿›è¡Œå¤šè·¯å½’å¹¶æŽ’åºï¼‰
+ *    â‘¤æœ€åŽé€‰å–æŸ¥è¯¢çš„åˆ—ï¼Œå¦‚æžœæœ‰DISTINCTå…³é”®å­—åˆ™å‰”é™¤é‡å¤çš„è¡Œ
+ *  (2)INSERTè¯­å¥
+ *    â‘ å…ˆæ‰¾åˆ°INTOå…³é”®å­—ï¼Œç¡®å®šè¦å¢žåŠ æ•°æ®çš„è¡¨æ ¼
+ *    â‘¡ç„¶åŽç¡®å®šå¢žåŠ çš„æ•°æ®æ‰€åœ¨çš„åˆ—
+ *    â‘¢æœ€åŽç¡®å®šå¢žåŠ çš„æ•°æ®ï¼Œå¹¶å¢žåŠ åœ¨å¯¹åº”çš„è¡¨æ ¼ä¸Šï¼ˆä¿®æ”¹æ–‡ä»¶ï¼‰
+ *  (3)DELETEè¯­å¥
+ *    â‘ å…ˆæ‰¾åˆ°FROMå…³é”®å­—ï¼Œç¡®å®šè¦åˆ é™¤æ•°æ®çš„è¡¨æ ¼
+ *    â‘¡å†çœ‹æ˜¯å¦æœ‰WHEREå…³é”®å­—ï¼Œå¦‚æžœæ²¡æœ‰ï¼Œåˆ™åˆ é™¤å…¨éƒ¨è¡Œï¼Œå¦åˆ™è¿›è¡Œä¸‹ä¸€æ­¥
+ *    â‘¢è®¡ç®—WHEREçš„è¡¨è¾¾å¼ï¼Œå°†ç¬¦åˆæ¡ä»¶çš„è¡Œåˆ é™¤ï¼ˆæ“ä½œæ—¶å®žé™…ä¸Šæ˜¯å°†ä¸ç¬¦åˆæ¡ä»¶çš„è¡Œä¿ç•™ï¼‰
+ *  (4)UPDATEè¯­å¥
+ *    â‘ å…ˆæ‰¾åˆ°UPDATEå…³é”®å­—ï¼Œç¡®å®šè¦æ›´æ–°æ•°æ®çš„è¡¨æ ¼
+ *    â‘¡å†æ‰¾SETå…³é”®å­—ï¼Œç¡®å®šè¦æ›´æ–°æ•°æ®çš„åˆ—å’Œå¯¹åº”çš„æ•°æ®
+ *    â‘¢å†æ‰¾WHEREå…³é”®å­—ï¼Œå°†ç¬¦åˆæ¡ä»¶çš„è¡Œçš„æ•°æ®æ›´æ–°
+ *  (5)CREATEè¯­å¥
+ *    â‘ å…ˆæ‰¾åˆ°TABLEå…³é”®å­—ï¼Œç¡®å®šè¦å¢žåŠ çš„è¡¨æ ¼çš„åç§°
+ *    â‘¡ç¡®å®šè¯¥è¡¨æ ¼çš„å„åˆ—çš„æ ‡é¢˜åç§°åŠæ•°æ®ç±»åž‹
+ *  (6)DROPè¯­å¥
+ *    â‘ æ‰¾åˆ°TABLEå…³é”®å­—ï¼Œç¡®å®šè¦åˆ é™¤çš„è¡¨æ ¼çš„åç§°ï¼Œåœ¨ç¡¬ç›˜ä¸­åˆ é™¤è¯¥è¡¨æ ¼
+ * æµ‹è¯•æ–¹æ³•ï¼š
+ * ç›®å½•ä¸‹æœ‰DB1ã€DB2ã€DB3ä¸‰ä¸ªå­˜å‚¨æ•°æ®åº“çš„æ–‡ä»¶å¤¹å’Œsql_command_1.txtã€sql_command_2.txtã€sql_command_3.txtä¸‰ä¸ªSQLå‘½ä»¤æ–‡ä»¶ï¼Œ
+ * ä¸‰ä¸ªæ–‡ä»¶å¤¹å’Œä¸‰ä¸ªSQLå‘½ä»¤æ–‡ä»¶åˆ†åˆ«ä¸€ä¸€å¯¹åº”ï¼Œåœ¨ç¼–è¯‘å™¨ä¸‹è¿è¡Œæœ¬ç¨‹åºåŽï¼Œè¾“å…¥sql_command_1.txtå’ŒDB1\å³å¯ï¼ˆ2å’Œ3åŒç†ï¼‰
  */
 
 #include<iostream>
@@ -48,13 +48,13 @@
 #include<string>
 #include<vector>
 #include<algorithm>
-#include<windows.h> /* ÔÚLinux»òUnixÏÂ±àÒëÊ±ÇëÉ¾³ý´ËÐÐ */
+#include<windows.h> /* åœ¨Linuxæˆ–Unixä¸‹ç¼–è¯‘æ—¶è¯·åˆ é™¤æ­¤è¡Œ */
 
-#define MAXLENGTH 2048 /* charÊý×éµÄ×î´ó³¤¶È */
-#define MAXROW 5000 /* ´¢´æÔÚÄÚ´æÖÐµÄÊý¾ÝµÄ×î´óÐÐÊý */
-#define MAXPRINTLINE 9000 /* Êä³öµ½ÆÁÄ»ÖÐµÄ×î´óÐÐÊý */
+#define MAXLENGTH 2048 /* charæ•°ç»„çš„æœ€å¤§é•¿åº¦ */
+#define MAXROW 5000 /* å‚¨å­˜åœ¨å†…å­˜ä¸­çš„æ•°æ®çš„æœ€å¤§è¡Œæ•° */
+#define MAXPRINTLINE 9000 /* è¾“å‡ºåˆ°å±å¹•ä¸­çš„æœ€å¤§è¡Œæ•° */
 
-/* ¸÷SQL¹Ø¼ü×ÖµÄ´úºÅ */
+/* å„SQLå…³é”®å­—çš„ä»£å· */
 #define SELECT 0
 #define FROM 1
 #define WHERE 2
@@ -73,11 +73,11 @@
 #define CREATE 15
 #define DROP 16
 
-/* ÅÅÐò·½Ê½µÄ´úºÅ */
+/* æŽ’åºæ–¹å¼çš„ä»£å· */
 #define ASC 0
 #define DESC 1
 
-/* ±í´ïÊ½ÖÐÊý¾ÝÀàÐÍµÄ´úºÅ */
+/* è¡¨è¾¾å¼ä¸­æ•°æ®ç±»åž‹çš„ä»£å· */
 #define CONST_STRING 1
 #define CONST_INT 2
 #define ARGUMENT 3
@@ -86,7 +86,7 @@
 #define RIGHT_BRAC 6
 #define RESULT_SET 7
 
-/* ÔËËãµÄ´úºÅ */
+/* è¿ç®—çš„ä»£å· */
 #define LESS 0
 #define GREATER 10
 #define EQL 20
@@ -105,7 +105,7 @@
 #define IN 150
 #define NOT_IN 160
 
-/* ´íÎóÀàÐÍµÄ´úºÅ */
+/* é”™è¯¯ç±»åž‹çš„ä»£å· */
 #define TABLE_NOT_FOUND -1
 #define TITLE_NOT_FOUND -2
 #define EXPRESSION_ERROR -3
@@ -115,13 +115,13 @@
 
 using namespace std;
 
-/* ÀàµÄÉùÃ÷ */
+/* ç±»çš„å£°æ˜Ž */
 class KEYWORD_DATA;
 class COMPARE_DATA;
 class TABLE;
 class EXPRESSION_DATA;
 
-/* º¯ÊýÉùÃ÷ */
+/* å‡½æ•°å£°æ˜Ž */
 int atoi(string &st);
 inline char upper_case(char ch);
 string upper_case(const string &st);
@@ -141,15 +141,15 @@ void parse_delete(string buf);
 void parse_update(string buf);
 void parse_create(string buf);
 void parse_drop(string buf);
-void init_window(char *command_filename); /* ÔÚLinux»òUnixÏÂ±àÒëÊ±ÇëÉ¾³ý´Ëº¯Êý */
+void init_window(char *command_filename); /* åœ¨Linuxæˆ–Unixä¸‹ç¼–è¯‘æ—¶è¯·åˆ é™¤æ­¤å‡½æ•° */
 
-char db_dir[MAXLENGTH]; /* ´¢´æÊý¾Ý¿âµÄÎÄ¼þ¼Ð */
+char db_dir[MAXLENGTH]; /* å‚¨å­˜æ•°æ®åº“çš„æ–‡ä»¶å¤¹ */
 
-/* ¹Ø¼ü×Ö */
+/* å…³é”®å­— */
 class KEYWORD_DATA
 {
 public:
-	int type,beginpos,endpos; /* typeÎª´úºÅ£¬beginposºÍendpos·Ö±ð±íÊ¾¸Ã¹Ø¼ü×ÖÔÚ×Ö·û´®µÄÆðÊ¼Î»ÖÃºÍ½áÊøÎ»ÖÃ */
+	int type,beginpos,endpos; /* typeä¸ºä»£å·ï¼Œbeginposå’Œendposåˆ†åˆ«è¡¨ç¤ºè¯¥å…³é”®å­—åœ¨å­—ç¬¦ä¸²çš„èµ·å§‹ä½ç½®å’Œç»“æŸä½ç½® */
 
 	KEYWORD_DATA(){};
 
@@ -161,7 +161,7 @@ public:
 	}
 };
 
-/* ÓÃÓÚ¿ìËÙÅÅÐòÊ±µÄ±È½Ïº¯ÊýµÄ±È½ÏÊý¾Ý */
+/* ç”¨äºŽå¿«é€ŸæŽ’åºæ—¶çš„æ¯”è¾ƒå‡½æ•°çš„æ¯”è¾ƒæ•°æ® */
 class COMPARE_DATA
 {
 public:
@@ -211,11 +211,11 @@ public:
 	}
 }compare_data;
 
-/* ±í´ïÊ½ÖÐµÄÊý¾Ý */
+/* è¡¨è¾¾å¼ä¸­çš„æ•°æ® */
 class EXPRESSION_DATA
 {
 	friend class TABLE;
-	int type,value; /* typeÊÇÀàÐÍ´úºÅ£¬valueºÍstÊÇ²»Í¬ÀàÐÍÏÂµÄÊý¾ÝÖµ */
+	int type,value; /* typeæ˜¯ç±»åž‹ä»£å·ï¼Œvalueå’Œstæ˜¯ä¸åŒç±»åž‹ä¸‹çš„æ•°æ®å€¼ */
 	string st;
 
 	EXPRESSION_DATA(){};
@@ -284,7 +284,7 @@ class EXPRESSION_DATA
 		outfile.close();
 	}
 
-	/* ÓënumÊý¾Ý×öopeÔËËã */
+	/* ä¸Žnumæ•°æ®åšopeè¿ç®— */
 	void calc(EXPRESSION_DATA &num,EXPRESSION_DATA &ope)
 	{
 		if(num.type==RESULT_SET&&(ope.value==IN||ope.value==NOT_IN))
@@ -318,7 +318,7 @@ class EXPRESSION_DATA
 		}
 		if(num.type==RESULT_SET)
 		{
-			if(num.value!=1)sql_error(RESULTSET_ERROR,"½á¹û¼¯ÖÐÓÐ¶à¸öÔªËØµ«Ö»Ðè·ÃÎÊÒ»¸ö","");
+			if(num.value!=1)sql_error(RESULTSET_ERROR,"ç»“æžœé›†ä¸­æœ‰å¤šä¸ªå…ƒç´ ä½†åªéœ€è®¿é—®ä¸€ä¸ª","");
 			ifstream infile;
 			char filename[MAXLENGTH],buf[MAXLENGTH];
 			string2char(num.st,filename);
@@ -359,15 +359,15 @@ class EXPRESSION_DATA
 	}
 };
 
-/* ±í¸ñÀàÐÍ */
+/* è¡¨æ ¼ç±»åž‹ */
 class TABLE
 {
-	int r,c,ts; /* rºÍc·Ö±ð±íÊ¾ÐÐÊýºÍÁÐÊý£¬ts±íÊ¾¸Ã±í¸ñ°üº¬µÄ±í¸ñÊýÁ¿£¨¼´Á¬½ÓÁË¶àÉÙ¸ö±í¸ñ£©*/
-	bool *isint; /* isint±íÊ¾Ä³Ò»ÁÐµÄÊý¾ÝÀàÐÍÊÇ·ñÎªÕûÐÍ */
-	char *tablename; /* ±í¸ñÃû³Æ */
-	string tn0,tablenamest,*title,*data; /* title¼ÇÂ¼Ã¿ÁÐµÄ±êÌâ */
+	int r,c,ts; /* rå’Œcåˆ†åˆ«è¡¨ç¤ºè¡Œæ•°å’Œåˆ—æ•°ï¼Œtsè¡¨ç¤ºè¯¥è¡¨æ ¼åŒ…å«çš„è¡¨æ ¼æ•°é‡ï¼ˆå³è¿žæŽ¥äº†å¤šå°‘ä¸ªè¡¨æ ¼ï¼‰*/
+	bool *isint; /* isintè¡¨ç¤ºæŸä¸€åˆ—çš„æ•°æ®ç±»åž‹æ˜¯å¦ä¸ºæ•´åž‹ */
+	char *tablename; /* è¡¨æ ¼åç§° */
+	string tn0,tablenamest,*title,*data; /* titleè®°å½•æ¯åˆ—çš„æ ‡é¢˜ */
 
-	/* ·ÖÎöÖÐ×º±í´ïÊ½buf£¬²¢×ª»¯³ÉµÄºó×º±í´ïÊ½´¢´æÔÚvedÖÐ */
+	/* åˆ†æžä¸­ç¼€è¡¨è¾¾å¼bufï¼Œå¹¶è½¬åŒ–æˆçš„åŽç¼€è¡¨è¾¾å¼å‚¨å­˜åœ¨vedä¸­ */
 	void parse_infixexpre(const string &buf,vector<EXPRESSION_DATA> &ved)
 	{
 		int i,j,k,leftbrac=0,rightbrac=0;
@@ -523,7 +523,7 @@ class TABLE
 				}
 				while(i<buf.length()&&buf[i]!='(')
 					i++;
-				if(i==buf.length())sql_error(EXPRESSION_ERROR," È±ÉÙ×óÀ¨ºÅ ","");
+				if(i==buf.length())sql_error(EXPRESSION_ERROR," ç¼ºå°‘å·¦æ‹¬å· ","");
 				j=i+1;
 				i++;
 				while(i<buf.length()&&lefttmp>righttmp)
@@ -536,7 +536,7 @@ class TABLE
 					}
 					i++;
 				}
-				if(lefttmp>righttmp)sql_error(EXPRESSION_ERROR," È±ÉÙÓÒÀ¨ºÅ ","");
+				if(lefttmp>righttmp)sql_error(EXPRESSION_ERROR," ç¼ºå°‘å³æ‹¬å· ","");
 				k=i-2;
 				ved.push_back(EXPRESSION_DATA(RESULT_SET,buf.substr(j,k-j+1)));
 				negon=0;
@@ -555,7 +555,7 @@ class TABLE
 					}
 					i++;
 				}
-				if(lefttmp>righttmp)sql_error(EXPRESSION_ERROR," È±ÉÙÓÒÀ¨ºÅ ","");
+				if(lefttmp>righttmp)sql_error(EXPRESSION_ERROR," ç¼ºå°‘å³æ‹¬å· ","");
 				k=i-2;
 				ved.push_back(EXPRESSION_DATA(RESULT_SET,buf.substr(j,k-j+1)));
 				negon=0;
@@ -588,7 +588,7 @@ class TABLE
 		}
 	}
 
-	/* ¼ÆËãºó×º±í´ïÊ½ved£¬½«½á¹û±£´æÔÚsedÖÐ */
+	/* è®¡ç®—åŽç¼€è¡¨è¾¾å¼vedï¼Œå°†ç»“æžœä¿å­˜åœ¨sedä¸­ */
 	void calculate(vector<EXPRESSION_DATA> &ved,EXPRESSION_DATA *sed)
 	{
 		int i,tmp,size=0;
@@ -619,7 +619,7 @@ class TABLE
 				if(size<2)
 				{
 					delete []sed;
-					sql_error(EXPRESSION_ERROR," È±ÉÙ³£Á¿/±äÁ¿ ","");
+					sql_error(EXPRESSION_ERROR," ç¼ºå°‘å¸¸é‡/å˜é‡ ","");
 				}
 				sed[size-2].calc(sed[size-1],ved[i]);
 				size--;
@@ -628,14 +628,14 @@ class TABLE
 		if(size!=1)
 		{
 			delete []sed;
-			sql_error(EXPRESSION_ERROR," È±ÉÙ³£Á¿/±äÁ¿ ","");
+			sql_error(EXPRESSION_ERROR," ç¼ºå°‘å¸¸é‡/å˜é‡ ","");
 		}
 	}
 
 public:
 	TABLE(){};
 
-	/* ¶ÁÈ¡Ó²ÅÌÖÐÎÄ¼þÃûÎªfnµÄ±í¸ñ */
+	/* è¯»å–ç¡¬ç›˜ä¸­æ–‡ä»¶åä¸ºfnçš„è¡¨æ ¼ */
 	TABLE(string &fn)
 	{
 		int len=fn.length(),i;
@@ -673,7 +673,7 @@ public:
 		delete []filename;
 	}
 
-	/* ¿ìËÙÅÅÐòÖÐµÄ±È½Ïº¯Êý */
+	/* å¿«é€ŸæŽ’åºä¸­çš„æ¯”è¾ƒå‡½æ•° */
 	friend bool compare(const int n1,const int n2)
 	{
 		int i;
@@ -697,8 +697,8 @@ public:
 		return 0;
 	}
 
-	/* ´¦ÀíWHEREÓï¾ä£¬Ö»±£Áô½á¹ûºÍansÒ»ÑùµÄÐÐ£¨SELECTºÍDELETEÓï¾ä£©£¬
-	 * »òÕß½«½á¹ûºÍansÒ»ÑùµÄÐÐµÄÊý¾Ý¸üÐÂÎªupdÖÐµÄÊý¾Ý£¨UPDATEÓï¾ä£©
+	/* å¤„ç†WHEREè¯­å¥ï¼Œåªä¿ç•™ç»“æžœå’Œansä¸€æ ·çš„è¡Œï¼ˆSELECTå’ŒDELETEè¯­å¥ï¼‰ï¼Œ
+	 * æˆ–è€…å°†ç»“æžœå’Œansä¸€æ ·çš„è¡Œçš„æ•°æ®æ›´æ–°ä¸ºupdä¸­çš„æ•°æ®ï¼ˆUPDATEè¯­å¥ï¼‰
 	 */
 	void parse_where(const string &buf,int ans,const string *upd=NULL)
 	{
@@ -781,7 +781,7 @@ public:
 			}
 	}
 
-	/* Íâ²¿ÅÅÐò£º·Ö³ÉÈô¸É¸ö×î´óÐÐÊý²»³¬¹ýMAXROWµÄÎÄ¼þ·Ö±ð½øÐÐ¿ìËÙÅÅÐò£¬ÔÙ½øÐÐ¶àÂ·¹é²¢ÅÅÐò */
+	/* å¤–éƒ¨æŽ’åºï¼šåˆ†æˆè‹¥å¹²ä¸ªæœ€å¤§è¡Œæ•°ä¸è¶…è¿‡MAXROWçš„æ–‡ä»¶åˆ†åˆ«è¿›è¡Œå¿«é€ŸæŽ’åºï¼Œå†è¿›è¡Œå¤šè·¯å½’å¹¶æŽ’åº */
 	void extern_sort(const string &buf)
 	{
 		int i,j,k,tmp,expre_num=1,beginpos,endpos,order[MAXROW],*pagelen,maxvedsize=0;
@@ -999,7 +999,7 @@ public:
 		rename(st,get_file(tablename));
 	}
 
-	/* DISTINCT´¦Àí£ºÓÃÍâ²¿ÅÅÐòµÄ·½·¨ÌÞ³ýÖØ¸´µÄÐÐ */
+	/* DISTINCTå¤„ç†ï¼šç”¨å¤–éƒ¨æŽ’åºçš„æ–¹æ³•å‰”é™¤é‡å¤çš„è¡Œ */
 	void distinct()
 	{
 		int i,j,k,tmp,newr;
@@ -1117,7 +1117,7 @@ public:
 		r=newr;
 	}
 
-	/* Ñ¡È¡bufÖÐ°üÀ¨µÄÁÐ */
+	/* é€‰å–bufä¸­åŒ…æ‹¬çš„åˆ— */
 	void select_colomn(const string &buf)
 	{
 		int i,j,k,tmp,strbeginpos=-1,strendpos=0;
@@ -1215,7 +1215,7 @@ public:
 		data=new string[c];
 	}
 
-	/* ½«buf2ÖÐµÄÊý¾Ý²åÈëµÄbuf1µÄÁÐÖÐ£¬»ò²åÈëµ½ËùÓÐÁÐÖÐ£¨µ±selectallÎªÕæÊ±£©*/
+	/* å°†buf2ä¸­çš„æ•°æ®æ’å…¥çš„buf1çš„åˆ—ä¸­ï¼Œæˆ–æ’å…¥åˆ°æ‰€æœ‰åˆ—ä¸­ï¼ˆå½“selectallä¸ºçœŸæ—¶ï¼‰*/
 	void insert(const bool selectall,const string &buf1,const string &buf2)
 	{
 		int i,j,k,tmp,strbeginpos=-1,strendpos;
@@ -1260,7 +1260,7 @@ public:
 				j=i+1;
 				while(j<buf2.length()&&buf2[j]!=39)
 					j++;
-				if(j==buf2.length())sql_error(GRAMMAR_MISTAKE,"INSERT","È±ÉÙÓÒÀ¨ºÅ");
+				if(j==buf2.length())sql_error(GRAMMAR_MISTAKE,"INSERT","ç¼ºå°‘å³æ‹¬å·");
 				i++;
 				while(buf2[i]==' ')
 					i++;
@@ -1275,12 +1275,12 @@ public:
 				j=i+1;
 				while(j<buf2.length()&&buf2[j]>='0'&&buf2[j]<='9')
 					j++;
-				if(j==buf2.length())sql_error(GRAMMAR_MISTAKE,"INSERT","È±ÉÙÓÒÀ¨ºÅ");
+				if(j==buf2.length())sql_error(GRAMMAR_MISTAKE,"INSERT","ç¼ºå°‘å³æ‹¬å·");
 				vs.push_back(buf2.substr(i,j-i));
 				i=j;
 			}
 		}
-		if(vc.size()!=vs.size())sql_error(GRAMMAR_MISTAKE,"INSERT","Êý¾Ý²»Æ¥Åä");
+		if(vc.size()!=vs.size())sql_error(GRAMMAR_MISTAKE,"INSERT","æ•°æ®ä¸åŒ¹é…");
 		copy("~$temp",tmptd);
 		for(i=0;i<c;i++)
 			data[i]="";
@@ -1310,7 +1310,7 @@ public:
 		outfile.close();
 	}
 
-	/* Âú×ãbuf2Ìõ¼þµÄÐÐ¸üÐÂÊý¾Ý */
+	/* æ»¡è¶³buf2æ¡ä»¶çš„è¡Œæ›´æ–°æ•°æ® */
 	void update(const string &buf1,const string &buf2)
 	{
 		int i,j,strbeginpos=-2,strendpos;
@@ -1361,7 +1361,7 @@ public:
 			}
 			i++;
 		}
-		if(strbeginpos!=-1)sql_error(GRAMMAR_MISTAKE,"UPDATE","Î´ÕÒµ½¸üÐÂµÄÁÐºÍÊý¾Ý");
+		if(strbeginpos!=-1)sql_error(GRAMMAR_MISTAKE,"UPDATE","æœªæ‰¾åˆ°æ›´æ–°çš„åˆ—å’Œæ•°æ®");
 		update_data=new string[c];
 		for(i=0;i<c;i++)
 			update_data[i]="";
@@ -1371,7 +1371,7 @@ public:
 		delete []update_data;
 	}
 
-	/* ½«µ±Ç°±í¸ñ¸´ÖÆµ½tdÖÐ£¬²¢ÔÚÓ²ÅÌÖÐÒÔnewfnÃüÃû */
+	/* å°†å½“å‰è¡¨æ ¼å¤åˆ¶åˆ°tdä¸­ï¼Œå¹¶åœ¨ç¡¬ç›˜ä¸­ä»¥newfnå‘½å */
 	void copy(const char *newfn,TABLE &td,const bool usenewtitle=0)
 	{
 		int len=strlen(newfn),i,j,tmp;
@@ -1415,7 +1415,7 @@ public:
 		outfile.close();
 	}
 
-	/* ¸ù¾ÝonÌõ¼þÁ¬½Ó±í¸ñtd */
+	/* æ ¹æ®onæ¡ä»¶è¿žæŽ¥è¡¨æ ¼td */
 	void join(const TABLE &td,const string &on="")
 	{
 		int i,j,k,l,tmp,oldc=c,newr=0,leftr;
@@ -1542,7 +1542,7 @@ public:
 		}
 	}
 
-	/* Êä³öµ±Ç°±í¸ñµ½ÆÁÄ»ÖÐºÍÎÄ¼þÖÐ */
+	/* è¾“å‡ºå½“å‰è¡¨æ ¼åˆ°å±å¹•ä¸­å’Œæ–‡ä»¶ä¸­ */
 	void print(const string &command)
 	{
 		static int printtime=0;
@@ -1578,9 +1578,9 @@ public:
 		outfile.open(buf);
 		infile.open(get_file(tablename));
 		infile>>rtmp>>ctmp;
-		outfile<<"SQLÃüÁî : "<<endl<<command<<";"<<endl<<endl;
-		cout<<endl<<"±í¸ñ´óÐ¡ : "<<rtmp<<"ÐÐ¡Á"<<ctmp<<"ÁÐ"<<endl<<endl;
-		outfile<<"±í¸ñ´óÐ¡ : "<<rtmp<<"ÐÐ¡Á"<<ctmp<<"ÁÐ"<<endl<<endl;
+		outfile<<"SQLå‘½ä»¤ : "<<endl<<command<<";"<<endl<<endl;
+		cout<<endl<<"è¡¨æ ¼å¤§å° : "<<rtmp<<"è¡ŒÃ—"<<ctmp<<"åˆ—"<<endl<<endl;
+		outfile<<"è¡¨æ ¼å¤§å° : "<<rtmp<<"è¡ŒÃ—"<<ctmp<<"åˆ—"<<endl<<endl;
 		infile.get();
 		for(i=0;i<ctmp;i++)
 		{
@@ -1619,7 +1619,7 @@ public:
 		outfile<<endl;
 		for(i=0;i<rtmp;i++)
 		{
-			if(i==MAXPRINTLINE)cout<<endl<<"Êä³öÊý¾ÝÌ«´ó£¬Ê£Óà²¿·ÖÖ»Êä³öµ½Output"<<printtime<<".txtÖÐ£¬²»Êä³öµ½ÆÁÄ»ÖÐ"<<endl;
+			if(i==MAXPRINTLINE)cout<<endl<<"è¾“å‡ºæ•°æ®å¤ªå¤§ï¼Œå‰©ä½™éƒ¨åˆ†åªè¾“å‡ºåˆ°Output"<<printtime<<".txtä¸­ï¼Œä¸è¾“å‡ºåˆ°å±å¹•ä¸­"<<endl;
 			for(j=0;j<ctmp;j++)
 			{
 				if(j)
@@ -1640,20 +1640,20 @@ public:
 			if(i<MAXPRINTLINE)cout<<endl;
 			outfile<<endl;
 		}
-		cout<<endl<<"±í¸ñÊä³öÍê±Ï£¬Í¬Ê±±£´æÔÚOutput"<<printtime<<".txtÖÐ"<<endl<<endl;
+		cout<<endl<<"è¡¨æ ¼è¾“å‡ºå®Œæ¯•ï¼ŒåŒæ—¶ä¿å­˜åœ¨Output"<<printtime<<".txtä¸­"<<endl<<endl;
 		infile.close();
 		outfile.close();
 		delete []maxlen;
 	}
 
-	/* ½«±í¸ñÒÔ½á¹û¼¯µÄÐÎÊ½Êä³öµ½Ó²ÅÌÖÐ */
+	/* å°†è¡¨æ ¼ä»¥ç»“æžœé›†çš„å½¢å¼è¾“å‡ºåˆ°ç¡¬ç›˜ä¸­ */
 	void write_set(const char *setname,int *setsize)
 	{
 		int i,tmp;
 		char buf[MAXLENGTH];
 		ifstream infile;
 		ofstream outfile;
-		if(c!=1)sql_error(RESULTSET_ERROR,"½á¹û¼¯ÖÐ³öÏÖ¶àÁÐ","");
+		if(c!=1)sql_error(RESULTSET_ERROR,"ç»“æžœé›†ä¸­å‡ºçŽ°å¤šåˆ—","");
 		infile.open(get_file(tablename));
 		infile>>tmp>>tmp;
 		infile.get();
@@ -1670,7 +1670,7 @@ public:
 	}
 };
 
-/* ½«st×ª»»ÎªÕûÐÍ */
+/* å°†stè½¬æ¢ä¸ºæ•´åž‹ */
 int atoi(string &st)
 {
 	int i,len=st.length(),ans=0;
@@ -1679,14 +1679,14 @@ int atoi(string &st)
 	return ans;
 }
 
-/* ·µ»Ø´óÐ´×ÖÄ¸ */
+/* è¿”å›žå¤§å†™å­—æ¯ */
 inline char upper_case(char ch)
 {
 	if(ch>='a'&&ch<='z')return ch-'a'+'A';
 	return ch;
 }
 
-/* ½«stµÄ¸÷¸ö×ÖÄ¸¶¼±ä³É´óÐ´×ÖÄ¸ */
+/* å°†stçš„å„ä¸ªå­—æ¯éƒ½å˜æˆå¤§å†™å­—æ¯ */
 string upper_case(const string &st)
 {
 	int i=st.length();
@@ -1696,7 +1696,7 @@ string upper_case(const string &st)
 	return str;
 }
 
-/* ½«stringÀàÐÍµÄ×Ö·û´®×ª»»Îªchar*ÀàÐÍµÄ×Ö·û´® */
+/* å°†stringç±»åž‹çš„å­—ç¬¦ä¸²è½¬æ¢ä¸ºchar*ç±»åž‹çš„å­—ç¬¦ä¸² */
 void string2char(const string &str,char *buf)
 {
 	int i,len=str.length();
@@ -1705,13 +1705,13 @@ void string2char(const string &str,char *buf)
 	buf[len]='\0';
 }
 
-/* ÅÐ¶ÏÄ³¸ö×Ö·ûÊÇ·ñ×ÖÄ¸/Êý×Ö/ÏÂ»®Ïß */
+/* åˆ¤æ–­æŸä¸ªå­—ç¬¦æ˜¯å¦å­—æ¯/æ•°å­—/ä¸‹åˆ’çº¿ */
 inline bool not_charornum(char ch)
 {
 	return !((ch>='a'&&ch<'z')||(ch>='A'&&ch<'Z')||(ch>='0'&&ch<='9')||ch=='_');
 }
 
-/* É¾³ý×Ö·û´®Í·ºÍÎ²µÄ¿Õ¸ñºÍ»»ÐÐ·û */
+/* åˆ é™¤å­—ç¬¦ä¸²å¤´å’Œå°¾çš„ç©ºæ ¼å’Œæ¢è¡Œç¬¦ */
 string noblank_string(string &str)
 {
 	int i,j;
@@ -1722,7 +1722,7 @@ string noblank_string(string &str)
 	return str.substr(i,j-i+1);
 }
 
-/* ºöÂÔ´óÐ¡Ð´±È½Ïs1ºÍs2µÄÇ°n¸ö×Ö·û£¬ÏÂÍ¬ */
+/* å¿½ç•¥å¤§å°å†™æ¯”è¾ƒs1å’Œs2çš„å‰nä¸ªå­—ç¬¦ï¼Œä¸‹åŒ */
 bool strncasecmp(const char *s1,const char *s2,int n)
 {
 	int i;
@@ -1739,7 +1739,7 @@ bool strncasecmp(const string &s1,const string &s2,int n)
 	return 0;
 }
 
-/* ÔÚÎÄ¼þfilenameÖ®Ç°¼ÓÉÏÎÄ¼þ¼Ðdb_dirÃû */
+/* åœ¨æ–‡ä»¶filenameä¹‹å‰åŠ ä¸Šæ–‡ä»¶å¤¹db_dirå */
 char *get_file(const char *filename)
 {
 	static char filepathname[MAXLENGTH];
@@ -1752,7 +1752,7 @@ char *get_file(const char *filename)
 	return filepathname;
 }
 
-/* ·µ»ØÄ³¸öÔËËãµÄÓÅÏÈ¼¶ */
+/* è¿”å›žæŸä¸ªè¿ç®—çš„ä¼˜å…ˆçº§ */
 inline int priority(int ope)
 {
 	if(ope==PLUS||ope==MINUS)return 4;
@@ -1762,7 +1762,7 @@ inline int priority(int ope)
 	else return 3;
 }
 
-/* ±¨´íº¯Êý */
+/* æŠ¥é”™å‡½æ•° */
 void sql_error(const int error_no,string msg1,string msg2)
 {
 	int i;
@@ -1774,50 +1774,50 @@ void sql_error(const int error_no,string msg1,string msg2)
 		if(msg2[i]=='\n')msg2[i]=' ';
 	if(error_no==TABLE_NOT_FOUND)
 	{
-		cerr<<endl<<"³ö´í :"<<endl<<"ÔÚÓï¾ä \""<<msg2<<"\" ÖÐÎ´ÕÒµ½±í¸ñ \""<<msg1<<"\"£¬¿ÉÄÜÊÇÊý¾Ý¿âÂ·¾¶Ãû´íÎó"<<endl;
-		outfile<<"³ö´í : ÔÚÓï¾ä \""<<msg2<<"\" ÖÐÎ´ÕÒµ½±í¸ñ \""<<msg1<<"\"£¬¿ÉÄÜÊÇÊý¾Ý¿âÂ·¾¶Ãû´íÎó"<<endl;
+		cerr<<endl<<"å‡ºé”™ :"<<endl<<"åœ¨è¯­å¥ \""<<msg2<<"\" ä¸­æœªæ‰¾åˆ°è¡¨æ ¼ \""<<msg1<<"\"ï¼Œå¯èƒ½æ˜¯æ•°æ®åº“è·¯å¾„åé”™è¯¯"<<endl;
+		outfile<<"å‡ºé”™ : åœ¨è¯­å¥ \""<<msg2<<"\" ä¸­æœªæ‰¾åˆ°è¡¨æ ¼ \""<<msg1<<"\"ï¼Œå¯èƒ½æ˜¯æ•°æ®åº“è·¯å¾„åé”™è¯¯"<<endl;
 	}
 	else if(error_no==TITLE_NOT_FOUND)
 	{
-		cerr<<endl<<"³ö´í :"<<endl<<"ÔÚÓï¾ä \""<<msg2<<"\" ÖÐÎ´ÕÒµ½±êÌâÎª \""<<msg1<<"\" µÄÁÐ"<<endl;
-		outfile<<"³ö´í : ÔÚÓï¾ä \""<<msg2<<"\" ÖÐÎ´ÕÒµ½±êÌâÎª \""<<msg1<<"\" µÄÁÐ"<<endl;
+		cerr<<endl<<"å‡ºé”™ :"<<endl<<"åœ¨è¯­å¥ \""<<msg2<<"\" ä¸­æœªæ‰¾åˆ°æ ‡é¢˜ä¸º \""<<msg1<<"\" çš„åˆ—"<<endl;
+		outfile<<"å‡ºé”™ : åœ¨è¯­å¥ \""<<msg2<<"\" ä¸­æœªæ‰¾åˆ°æ ‡é¢˜ä¸º \""<<msg1<<"\" çš„åˆ—"<<endl;
 	}
 	else if(error_no==EXPRESSION_ERROR)
 	{
-		cerr<<endl<<"³ö´í :"<<endl<<"WHERE/ON/ORDER BY±í´ïÊ½Óï·¨´íÎó -"<<msg1<<endl;
-		outfile<<"³ö´í : WHERE/ON/ORDER BY±í´ïÊ½Óï·¨´íÎó -"<<msg1<<endl;
+		cerr<<endl<<"å‡ºé”™ :"<<endl<<"WHERE/ON/ORDER BYè¡¨è¾¾å¼è¯­æ³•é”™è¯¯ -"<<msg1<<endl;
+		outfile<<"å‡ºé”™ : WHERE/ON/ORDER BYè¡¨è¾¾å¼è¯­æ³•é”™è¯¯ -"<<msg1<<endl;
 	}
 	else if(error_no==RESULTSET_ERROR)
 	{
-		cerr<<endl<<"³ö´í :"<<endl<<msg1<<endl;
-		outfile<<"³ö´í : "<<msg1<<endl;
+		cerr<<endl<<"å‡ºé”™ :"<<endl<<msg1<<endl;
+		outfile<<"å‡ºé”™ : "<<msg1<<endl;
 	}
 	else if(error_no==GRAMMAR_MISTAKE)
 	{
-		cerr<<endl<<"³ö´í :"<<endl<<"ÔÚÓï¾ä \""<<msg1<<"\" ÖÐ³öÏÖÓï·¨´íÎó - "<<msg2<<endl;
-		outfile<<"³ö´í : ÔÚÓï¾ä \""<<msg1<<"\" ÖÐ³öÏÖÓï·¨´íÎó - "<<msg2<<endl;
+		cerr<<endl<<"å‡ºé”™ :"<<endl<<"åœ¨è¯­å¥ \""<<msg1<<"\" ä¸­å‡ºçŽ°è¯­æ³•é”™è¯¯ - "<<msg2<<endl;
+		outfile<<"å‡ºé”™ : åœ¨è¯­å¥ \""<<msg1<<"\" ä¸­å‡ºçŽ°è¯­æ³•é”™è¯¯ - "<<msg2<<endl;
 	}
 	else if(error_no==COMMAND_NOT_FOUND)
 	{
-		cerr<<endl<<"³ö´í :"<<endl<<"Î´ÕÒµ½SQLÃüÁîÎÄ¼þ \""<<msg1<<"\""<<endl;
-		outfile<<"³ö´í : Î´ÕÒµ½SQLÃüÁîÎÄ¼þ \""<<msg1<<"\""<<endl;
+		cerr<<endl<<"å‡ºé”™ :"<<endl<<"æœªæ‰¾åˆ°SQLå‘½ä»¤æ–‡ä»¶ \""<<msg1<<"\""<<endl;
+		outfile<<"å‡ºé”™ : æœªæ‰¾åˆ°SQLå‘½ä»¤æ–‡ä»¶ \""<<msg1<<"\""<<endl;
 	}
 	outfile.close();
-	cout<<"\n³ÌÐòÒì³£ÖÐ¶Ï\n";
+	cout<<"\nç¨‹åºå¼‚å¸¸ä¸­æ–­\n";
 	system("PAUSE");
 	exit(0);
 }
 
-/* ¹Ø¼ü×ÖµÄÓï·¨¼ì²é */
+/* å…³é”®å­—çš„è¯­æ³•æ£€æŸ¥ */
 void grammar_check(vector<KEYWORD_DATA> &vkw)
 {
 	int i,ct,pt;
 	bool mistake=0;
-	if(vkw[0].type==INSERT&&vkw.size()!=3)sql_error(GRAMMAR_MISTAKE,"INSERT","¹Ø¼ü×Ö¹ý¶à»ò¹ýÉÙ£¬ÓÐ¿ÉÄÜÊÇÈ±ÉÙ·ÖºÅ");
-	else if(vkw[0].type==DELETE&&vkw.size()!=2&&vkw.size()!=3)sql_error(GRAMMAR_MISTAKE,"DELETE","¹Ø¼ü×Ö¹ý¶à»ò¹ýÉÙ£¬ÓÐ¿ÉÄÜÊÇÈ±ÉÙ·ÖºÅ");
-	else if(vkw[0].type==UPDATE&&vkw.size()!=3)sql_error(GRAMMAR_MISTAKE,"UPDATE","¹Ø¼ü×Ö¹ý¶à»ò¹ýÉÙ£¬ÓÐ¿ÉÄÜÊÇÈ±ÉÙ·ÖºÅ");
-	else if(vkw[0].type==CREATE&&vkw.size()!=1)sql_error(GRAMMAR_MISTAKE,"CREATE","¹Ø¼ü×Ö¹ý¶à»ò¹ýÉÙ£¬ÓÐ¿ÉÄÜÊÇÈ±ÉÙ·ÖºÅ");
-	else if(vkw[0].type==DROP&&vkw.size()!=1)sql_error(GRAMMAR_MISTAKE,"DROP","¹Ø¼ü×Ö¹ý¶à»ò¹ýÉÙ£¬ÓÐ¿ÉÄÜÊÇÈ±ÉÙ·ÖºÅ");
+	if(vkw[0].type==INSERT&&vkw.size()!=3)sql_error(GRAMMAR_MISTAKE,"INSERT","å…³é”®å­—è¿‡å¤šæˆ–è¿‡å°‘ï¼Œæœ‰å¯èƒ½æ˜¯ç¼ºå°‘åˆ†å·");
+	else if(vkw[0].type==DELETE&&vkw.size()!=2&&vkw.size()!=3)sql_error(GRAMMAR_MISTAKE,"DELETE","å…³é”®å­—è¿‡å¤šæˆ–è¿‡å°‘ï¼Œæœ‰å¯èƒ½æ˜¯ç¼ºå°‘åˆ†å·");
+	else if(vkw[0].type==UPDATE&&vkw.size()!=3)sql_error(GRAMMAR_MISTAKE,"UPDATE","å…³é”®å­—è¿‡å¤šæˆ–è¿‡å°‘ï¼Œæœ‰å¯èƒ½æ˜¯ç¼ºå°‘åˆ†å·");
+	else if(vkw[0].type==CREATE&&vkw.size()!=1)sql_error(GRAMMAR_MISTAKE,"CREATE","å…³é”®å­—è¿‡å¤šæˆ–è¿‡å°‘ï¼Œæœ‰å¯èƒ½æ˜¯ç¼ºå°‘åˆ†å·");
+	else if(vkw[0].type==DROP&&vkw.size()!=1)sql_error(GRAMMAR_MISTAKE,"DROP","å…³é”®å­—è¿‡å¤šæˆ–è¿‡å°‘ï¼Œæœ‰å¯èƒ½æ˜¯ç¼ºå°‘åˆ†å·");
 	for(i=1;i<vkw.size();i++)
 	{
 		ct=vkw[i].type;
@@ -1838,17 +1838,17 @@ void grammar_check(vector<KEYWORD_DATA> &vkw)
 		else if(pt==UPDATE&&ct!=SET)mistake=1;
 		if(mistake)
 		{
-			if(vkw[0].type==SELECT)sql_error(GRAMMAR_MISTAKE,"SELECT","¹Ø¼ü×ÖË³ÐòÓÐÎó");
-			else if(vkw[0].type==INSERT)sql_error(GRAMMAR_MISTAKE,"INSERT","¹Ø¼ü×ÖË³ÐòÓÐÎó");
-			else if(vkw[0].type==DELETE)sql_error(GRAMMAR_MISTAKE,"DELETE","¹Ø¼ü×ÖË³ÐòÓÐÎó");
-			else if(vkw[0].type==UPDATE)sql_error(GRAMMAR_MISTAKE,"UPDATE","¹Ø¼ü×ÖË³ÐòÓÐÎó");
-			else if(vkw[0].type==CREATE)sql_error(GRAMMAR_MISTAKE,"CREATE","¹Ø¼ü×ÖË³ÐòÓÐÎó");
-			else if(vkw[0].type==DROP)sql_error(GRAMMAR_MISTAKE,"DROP","¹Ø¼ü×ÖË³ÐòÓÐÎó");
+			if(vkw[0].type==SELECT)sql_error(GRAMMAR_MISTAKE,"SELECT","å…³é”®å­—é¡ºåºæœ‰è¯¯");
+			else if(vkw[0].type==INSERT)sql_error(GRAMMAR_MISTAKE,"INSERT","å…³é”®å­—é¡ºåºæœ‰è¯¯");
+			else if(vkw[0].type==DELETE)sql_error(GRAMMAR_MISTAKE,"DELETE","å…³é”®å­—é¡ºåºæœ‰è¯¯");
+			else if(vkw[0].type==UPDATE)sql_error(GRAMMAR_MISTAKE,"UPDATE","å…³é”®å­—é¡ºåºæœ‰è¯¯");
+			else if(vkw[0].type==CREATE)sql_error(GRAMMAR_MISTAKE,"CREATE","å…³é”®å­—é¡ºåºæœ‰è¯¯");
+			else if(vkw[0].type==DROP)sql_error(GRAMMAR_MISTAKE,"DROP","å…³é”®å­—é¡ºåºæœ‰è¯¯");
 		}
 	}
 }
 
-/* ½«bufÖÐµÄ¹Ø¼ü×Ö±£´æÔÚvkwÖÐ */
+/* å°†bufä¸­çš„å…³é”®å­—ä¿å­˜åœ¨vkwä¸­ */
 void find_keywords(const string &buf,vector<KEYWORD_DATA> &vkw)
 {
 	int i,j,len,leftbracnum=0,rightbracnum=0,qmnum=0;
@@ -1871,11 +1871,11 @@ void find_keywords(const string &buf,vector<KEYWORD_DATA> &vkw)
 		}
 	}
 	grammar_check(vkw);
-	if(qmnum%2)sql_error(GRAMMAR_MISTAKE,kw[vkw[0].type],"ÒýºÅÎªÆæÊý¸ö");
-	else if(rightmore||leftbracnum!=rightbracnum)sql_error(GRAMMAR_MISTAKE,kw[vkw[0].type],"À¨ºÅ²»Æ¥Åä");
+	if(qmnum%2)sql_error(GRAMMAR_MISTAKE,kw[vkw[0].type],"å¼•å·ä¸ºå¥‡æ•°ä¸ª");
+	else if(rightmore||leftbracnum!=rightbracnum)sql_error(GRAMMAR_MISTAKE,kw[vkw[0].type],"æ‹¬å·ä¸åŒ¹é…");
 }
 
-/* ·ÖÎöSELECTÓï¾ä£¬Òªµ÷ÓÃTABLEÀàÖÐµÄcopy¡¢join¡¢parse_where¡¢select_colomn¡¢distinctµÈ¶à¸ö³ÉÔ±º¯Êý */
+/* åˆ†æžSELECTè¯­å¥ï¼Œè¦è°ƒç”¨TABLEç±»ä¸­çš„copyã€joinã€parse_whereã€select_colomnã€distinctç­‰å¤šä¸ªæˆå‘˜å‡½æ•° */
 void parse_select(string buf,const char *resultset=NULL,int *setsize=NULL)
 {
 	static int selecttimes=-1;
@@ -1914,7 +1914,7 @@ void parse_select(string buf,const char *resultset=NULL,int *setsize=NULL)
 		vtd.push_back(TABLE(buf.substr(strbeginpos,strendpos-strbeginpos+1)));
 		if(vtd.size()>1)singletable=0;
 	}
-	if(!findtable)sql_error(GRAMMAR_MISTAKE,"SELECT","Î´ÕÒµ½±í¸ñ");
+	if(!findtable)sql_error(GRAMMAR_MISTAKE,"SELECT","æœªæ‰¾åˆ°è¡¨æ ¼");
 	for(i=0;singletable&&i<vkw.size();i++)
 		if(vkw[i].type==JOIN)
 		{
@@ -1992,7 +1992,7 @@ void parse_select(string buf,const char *resultset=NULL,int *setsize=NULL)
 	selecttimes--;
 }
 
-/* ·ÖÎöINSERTÓï¾ä£¬Òªµ÷ÓÃTABLEÀàÖÐµÄinsert³ÉÔ±º¯Êý */
+/* åˆ†æžINSERTè¯­å¥ï¼Œè¦è°ƒç”¨TABLEç±»ä¸­çš„insertæˆå‘˜å‡½æ•° */
 void parse_insert(string buf)
 {
 	int i,beginpos,endpos,tablesum=1,len=buf.length(),strbeginpos,strendpos;
@@ -2006,7 +2006,7 @@ void parse_insert(string buf)
 	endpos=vkw[i+1].beginpos-1;
 	for(i=beginpos;i<=endpos;i++)
 		if(buf[i]!=' '&&buf[i]!='\n')break;
-	if(i>endpos)sql_error(GRAMMAR_MISTAKE,"INSERT","Î´ÕÒµ½±í¸ñ");
+	if(i>endpos)sql_error(GRAMMAR_MISTAKE,"INSERT","æœªæ‰¾åˆ°è¡¨æ ¼");
 	strbeginpos=i;
 	for(i=strbeginpos;i<=endpos;i++)
 	{
@@ -2023,7 +2023,7 @@ void parse_insert(string buf)
 	table.print(buf);
 }
 
-/* ·ÖÎöDELETEÓï¾ä£¬Òªµ÷ÓÃTABLEÀàµÄparse_where³ÉÔ±º¯Êý */
+/* åˆ†æžDELETEè¯­å¥ï¼Œè¦è°ƒç”¨TABLEç±»çš„parse_whereæˆå‘˜å‡½æ•° */
 void parse_delete(string buf)
 {
 	int i,beginpos,endpos,tablesum=1,len=buf.length(),strbeginpos,strendpos;
@@ -2039,7 +2039,7 @@ void parse_delete(string buf)
 	i=beginpos;
 	for(i=beginpos;i<=endpos;i++)
 		if(buf[i]!=' '&&buf[i]!='\n')break;
-	if(i>endpos)sql_error(GRAMMAR_MISTAKE,"DELETE","Î´ÕÒµ½±í¸ñ");
+	if(i>endpos)sql_error(GRAMMAR_MISTAKE,"DELETE","æœªæ‰¾åˆ°è¡¨æ ¼");
 	strbeginpos=i;
 	for(i=strbeginpos;i<=endpos;i++)
 		if(buf[i]!=' '&&buf[i]!='\n')strendpos=i;
@@ -2056,7 +2056,7 @@ void parse_delete(string buf)
 	table.print(buf);
 }
 
-/* ·ÖÎöUPDATEÓï¾ä£¬Òªµ÷ÓÃTABLEÀàµÄupdate³ÉÔ±º¯Êý */
+/* åˆ†æžUPDATEè¯­å¥ï¼Œè¦è°ƒç”¨TABLEç±»çš„updateæˆå‘˜å‡½æ•° */
 void parse_update(string buf)
 {
 	int i,beginpos1,endpos1,beginpos2,endpos2,tablesum=1,len=buf.length(),strbeginpos,strendpos;
@@ -2070,7 +2070,7 @@ void parse_update(string buf)
 	i=beginpos1;
 	for(i=beginpos1;i<=endpos1;i++)
 		if(buf[i]!=' '&&buf[i]!='\n')break;
-	if(i>endpos1)sql_error(GRAMMAR_MISTAKE,"UPDATE","Î´ÕÒµ½±í¸ñ");
+	if(i>endpos1)sql_error(GRAMMAR_MISTAKE,"UPDATE","æœªæ‰¾åˆ°è¡¨æ ¼");
 	strbeginpos=i;
 	for(i=strbeginpos;i<=endpos1;i++)
 		if(buf[i]!=' '&&buf[i]!='\n')strendpos=i;
@@ -2087,7 +2087,7 @@ void parse_update(string buf)
 	table.print(buf);
 }
 
-/* ·ÖÎöCREATEÓï¾ä */
+/* åˆ†æžCREATEè¯­å¥ */
 void parse_create(string buf)
 {
 	int i,beginpos,endpos,len=buf.length();
@@ -2101,25 +2101,25 @@ void parse_create(string buf)
 	find_keywords(buf,vkw);
 	for(i=vkw[0].endpos+1;i<len;i++)
 		if(!strncasecmp(buf.substr(i,5),"TABLE",5))break;
-	if(i==len)sql_error(GRAMMAR_MISTAKE,"CREATE","Î´ÕÒµ½¹Ø¼ü×Ö\"TABLE\"");
+	if(i==len)sql_error(GRAMMAR_MISTAKE,"CREATE","æœªæ‰¾åˆ°å…³é”®å­—\"TABLE\"");
 	i+=5;
 	while(i<len&&(buf[i]==' '||buf[i]=='\n'))
 		i++;
-	if(i==len)sql_error(GRAMMAR_MISTAKE,"CREATE","Î´ÕÒµ½±í¸ñ");
+	if(i==len)sql_error(GRAMMAR_MISTAKE,"CREATE","æœªæ‰¾åˆ°è¡¨æ ¼");
 	beginpos=i;
 	while(i<len&&buf[i]!='(')
 	{
 		if(buf[i]!=' '&&buf[i]!='\n')endpos=i;
 		i++;
 	}
-	if(i==len)sql_error(GRAMMAR_MISTAKE,"CREATE","Î´ÕÒµ½´´½¨µÄÁÐÊý¾Ý");
+	if(i==len)sql_error(GRAMMAR_MISTAKE,"CREATE","æœªæ‰¾åˆ°åˆ›å»ºçš„åˆ—æ•°æ®");
 	i++;
 	tablename=buf.substr(beginpos,endpos-beginpos+1);
 	while(i<len&&buf[i]!=')')
 	{
 		while(i<len&&(buf[i]==' '||buf[i]=='\n'))
 			i++;
-		if(i==len)sql_error(GRAMMAR_MISTAKE,"CREATE","È±ÉÙÓÒÀ¨ºÅ");
+		if(i==len)sql_error(GRAMMAR_MISTAKE,"CREATE","ç¼ºå°‘å³æ‹¬å·");
 		beginpos=i;
 		while(i<len)
 		{
@@ -2127,7 +2127,7 @@ void parse_create(string buf)
 			if(buf[i]!=' '&&buf[i]!='\n')endpos=i;
 			i++;
 		}
-		if(i==len)sql_error(GRAMMAR_MISTAKE,"CREATE","È±ÉÙÊý¾ÝÀàÐÍ");
+		if(i==len)sql_error(GRAMMAR_MISTAKE,"CREATE","ç¼ºå°‘æ•°æ®ç±»åž‹");
 		title.push_back(buf.substr(beginpos,endpos-beginpos+1));
 		if(!strncasecmp(buf.substr(i,3),"int",3))isint.push_back(1);
 		else isint.push_back(0);
@@ -2145,11 +2145,11 @@ void parse_create(string buf)
 		if(isint[i])outfile<<"(int)";
 		outfile<<title[i]<<endl;
 	}
-	cout<<endl<<"´´½¨±í¸ñ"<<tablename<<"³É¹¦!"<<endl<<endl;
+	cout<<endl<<"åˆ›å»ºè¡¨æ ¼"<<tablename<<"æˆåŠŸ!"<<endl<<endl;
 	outfile.close();
 }
 
-/* ·ÖÎöDROPÓï¾ä */
+/* åˆ†æžDROPè¯­å¥ */
 void parse_drop(string buf)
 {
 	int i,len=buf.length();
@@ -2160,7 +2160,7 @@ void parse_drop(string buf)
 	find_keywords(buf,vkw);
 	for(i=0;i<len;i++)
 		if(!strncasecmp(buf.substr(i,5),"TABLE",5))break;
-	if(i==len)sql_error(GRAMMAR_MISTAKE,"DROP","Î´ÕÒµ½¹Ø¼ü×Ö\"TABLE\"");
+	if(i==len)sql_error(GRAMMAR_MISTAKE,"DROP","æœªæ‰¾åˆ°å…³é”®å­—\"TABLE\"");
 	i+=5;
 	ss<<noblank_string(buf.substr(i,len-i));
 	ss>>filename;
@@ -2168,10 +2168,10 @@ void parse_drop(string buf)
 	if(infile==NULL)sql_error(TABLE_NOT_FOUND,filename,buf);
 	infile.close();
 	remove(get_file(filename));
-	cout<<endl<<"É¾³ý±í¸ñ"<<filename<<"³É¹¦!"<<endl<<endl;
+	cout<<endl<<"åˆ é™¤è¡¨æ ¼"<<filename<<"æˆåŠŸ!"<<endl<<endl;
 }
 
-/* ³ÌÐò¿ªÊ¼Ê±³õÊ¼»¯´°¿Ú£¬ÔÚLinux»òUnixÏÂ±àÒëÊ±ÇëÉ¾³ý´Ëº¯Êý */
+/* ç¨‹åºå¼€å§‹æ—¶åˆå§‹åŒ–çª—å£ï¼Œåœ¨Linuxæˆ–Unixä¸‹ç¼–è¯‘æ—¶è¯·åˆ é™¤æ­¤å‡½æ•° */
 void init_window(char *command_filename)
 {
 	HANDLE hOut=GetStdHandle(STD_OUTPUT_HANDLE);
@@ -2180,13 +2180,13 @@ void init_window(char *command_filename)
 	SetConsoleScreenBufferSize(hOut,size);
 	SMALL_RECT rc={0,0,152,40};
 	SetConsoleWindowInfo(hOut,true,&rc);
-	cout<<"»¶Ó­Ê¹ÓÃminiSQL!"<<endl<<endl<<"ÇëÊäÈëSQLÃüÁîÎÄ¼þµÄÎÄ¼þÃû(Èç\"sql_command.txt\") :"<<endl;
+	cout<<"æ¬¢è¿Žä½¿ç”¨miniSQL!"<<endl<<endl<<"è¯·è¾“å…¥SQLå‘½ä»¤æ–‡ä»¶çš„æ–‡ä»¶å(å¦‚\"sql_command.txt\") :"<<endl;
 	do
 	{
 		cin.getline(command_filename,MAXLENGTH);
 	}
 	while(strlen(command_filename)==0);
-	cout<<endl<<"ÇëÊäÈë´æ´¢Êý¾Ý¿âµÄÎÄ¼þ¼Ð(Èç\"Database\\\") :"<<endl;
+	cout<<endl<<"è¯·è¾“å…¥å­˜å‚¨æ•°æ®åº“çš„æ–‡ä»¶å¤¹(å¦‚\"Database\\\") :"<<endl;
 	do
 	{
 		cin.getline(db_dir,MAXLENGTH);
@@ -2195,7 +2195,7 @@ void init_window(char *command_filename)
 	system("cls");
 }
 
-/* Ö÷º¯Êý£¬ÏÈ³õÊ¼»¯´°¿Ú£¬ÔÙ¶ÁÈ¡Ã¿ÌõSQLÃüÁî²¢µ÷ÓÃ¶ÔÓ¦µÄ·ÖÎöº¯Êý */
+/* ä¸»å‡½æ•°ï¼Œå…ˆåˆå§‹åŒ–çª—å£ï¼Œå†è¯»å–æ¯æ¡SQLå‘½ä»¤å¹¶è°ƒç”¨å¯¹åº”çš„åˆ†æžå‡½æ•° */
 int main()
 {
 	char command_filename[MAXLENGTH],*buf=new char[MAXLENGTH];
@@ -2216,40 +2216,40 @@ int main()
 		if(i==len)break;
 		if(!strncasecmp(buf+i,"SELECT",6)&&not_charornum(buf[i+6]))
 		{
-			cout<<"SQLÃüÁî : "<<endl<<buf+i<<";"<<endl;
+			cout<<"SQLå‘½ä»¤ : "<<endl<<buf+i<<";"<<endl;
 			parse_select(buf+i);
 		}
 		else if(!strncasecmp(buf+i,"INSERT",6)&&not_charornum(buf[i+6]))
 		{
-			cout<<"SQLÃüÁî : "<<endl<<buf+i<<";"<<endl;
+			cout<<"SQLå‘½ä»¤ : "<<endl<<buf+i<<";"<<endl;
 			parse_insert(buf+i);
 		}
 		else if(!strncasecmp(buf+i,"DELETE",6)&&not_charornum(buf[i+6]))
 		{
-			cout<<"SQLÃüÁî : "<<endl<<buf+i<<";"<<endl;
+			cout<<"SQLå‘½ä»¤ : "<<endl<<buf+i<<";"<<endl;
 			parse_delete(buf+i);
 		}
 		else if(!strncasecmp(buf+i,"UPDATE",6)&&not_charornum(buf[i+6]))
 		{
-			cout<<"SQLÃüÁî : "<<endl<<buf+i<<";"<<endl;
+			cout<<"SQLå‘½ä»¤ : "<<endl<<buf+i<<";"<<endl;
 			parse_update(buf+i);
 		}
 		else if(!strncasecmp(buf+i,"CREATE",6)&&not_charornum(buf[i+6]))
 		{
-			cout<<"SQLÃüÁî : "<<endl<<buf+i<<";"<<endl;
+			cout<<"SQLå‘½ä»¤ : "<<endl<<buf+i<<";"<<endl;
 			parse_create(buf+i);
 		}
 		else if(!strncasecmp(buf+i,"DROP",4)&&not_charornum(buf[i+4]))
 		{
-			cout<<"SQLÃüÁî : "<<endl<<buf+i<<";"<<endl;
+			cout<<"SQLå‘½ä»¤ : "<<endl<<buf+i<<";"<<endl;
 			parse_drop(buf+i);
 		}
-		else sql_error(GRAMMAR_MISTAKE,buf+i,"¹Ø¼ü×Ö²»Æ¥Åä");
+		else sql_error(GRAMMAR_MISTAKE,buf+i,"å…³é”®å­—ä¸åŒ¹é…");
 		system("PAUSE");
 		system("cls");
 	}
 	infile.close();
-	cout<<"ÒÑ¶ÁÈ¡ËùÓÐÃüÁî£¬³ÌÐò½«Õý³£ÍË³ö\n";
+	cout<<"å·²è¯»å–æ‰€æœ‰å‘½ä»¤ï¼Œç¨‹åºå°†æ­£å¸¸é€€å‡º\n";
 	system("PAUSE");
 	return 0;
 }
