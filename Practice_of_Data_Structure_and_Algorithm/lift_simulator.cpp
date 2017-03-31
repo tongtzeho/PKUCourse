@@ -1,36 +1,36 @@
-// ����ϵر�֤��
+// 我真诚地保证：
     
-// ���Լ��������������������ӷ�������Ƶ���������й�����
-// ��������������У���������ʲô���Ѷ�������ˣ���ô���ҽ��ڳ���ʵϰ������
-// ��ϸ���о��������������⣬�Լ����˸��ҵ���ʾ��
+// 我自己独立地完成了整个程序从分析、设计到编码的所有工作。
+// 如果在上述过程中，我遇到了什么困难而求教于人，那么，我将在程序实习报告中
+// 详细地列举我所遇到的问题，以及别人给我的提示。
 
-// �ҵĳ������з������õ�����������ĵ�֮����
-// ����̲ġ����ñʼǡ����ϵ�Դ�����Լ������ο����ϵĴ����,
-// �Ҷ��Ѿ��ڳ����ע����������ע�������õĳ�����
+// 我的程序里中凡是引用到其他程序或文档之处，
+// 例如教材、课堂笔记、网上的源代码以及其他参考书上的代码段,
+// 我都已经在程序的注释里很清楚地注明了引用的出处。
 
-// �Ҵ�δ��Ϯ�����˵ĳ���Ҳû�е��ñ��˵ĳ���
-// �������޸�ʽ�ĳ�Ϯ����ԭ�ⲻ���ĳ�Ϯ��
+// 我从未抄袭过别人的程序，也没有盗用别人的程序，
+// 不管是修改式的抄袭还是原封不动的抄袭。
 
-// �ұ�д������򣬴���û�����Ҫȥ�ƻ���������������ϵͳ��������ת��
+// 我编写这个程序，从来没有想过要去破坏或妨碍其他计算机系统的正常运转。
 
-// ���ݽṹ���㷨ʵϰ֮����ģ����
-// �ļ�����lift_simulator.cpp
-// ���ߣ����Ӻ� 
-// ���ڣ�2012��10��16��
-// �汾��1.5.0
-// ���뻷����Microsoft Visual C++ 6.0
-// ����ϵͳ��Microsoft Windows XP
-// ���뷽ʽ�����̶�������
-// �����ʽ��win32����̨�������
+// 数据结构与算法实习之电梯模拟器
+// 文件名：lift_simulator.cpp
+// 作者：------
+// 日期：2012年10月16日
+// 版本：1.5.0
+// 编译环境：Microsoft Visual C++ 6.0
+// 操作系统：Microsoft Windows XP
+// 输入方式：键盘读入数据
+// 输出方式：win32控制台界面输出
 
-// �������ܣ�
-// 1.��������˿͵��ܵȺ�ʱ�䡢�ܳ���ʱ�䣬ÿ���˿͵��˾��Ⱥ�ʱ�䡢�˾�����ʱ�䣬���е��ݵ��ؿ�����ÿ�����ݵ�λʱ���ڵ��ؿ���
-// 2.ʹ��win32����̨������������˶�״̬��λ�á������ڳ˿������Լ�ÿ��¥�ȴ��ĳ˿���
-// ��չ���ܣ�
-// 1.ʹ�������ֵ��ݵ����㷨���ܼ�������㷨���˾��Ⱥ�ʱ�䡢�ؿ����������ݣ��������ؿ��������㷨���ӽ�������
-// 2.���ÿ�������ڵĳ˿Ͱ��İ�ť���ȴ��ĳ˿Ͱ��İ�ť��ÿ����ÿ��¥�³��ֵĳ˿��������ϵ��ݵĳ˿��������뿪���ݵĳ˿�����
-// 3.�ڸ��������������ϵͳ�����£��ó��˵�������������ָ���Ӱ�죨��ʵϰ���棩
-// 4.�ڸ��������������ϵͳ�����£��ó��˸߲��ݡ��Ͳ��ݶ�ϵͳ����ָ���Ӱ�죨��ʵϰ���棩
+// 基本功能：
+// 1.输出各个乘客的总等候时间、总乘梯时间，每个乘客的人均等候时间、人均乘梯时间，所有电梯的载客量和每辆电梯单位时间内的载客量
+// 2.使用win32控制台界面输出电梯运动状态、位置、电梯内乘客数，以及每层楼等待的乘客数
+// 扩展功能：
+// 1.使用了四种电梯调度算法，能计算各种算法的人均等候时间、载客流量等数据，并依据载客流量对算法优劣进行排序
+// 2.输出每辆电梯内的乘客按的按钮、等待的乘客按的按钮、每秒钟每层楼新出现的乘客人数、上电梯的乘客人数、离开电梯的乘客人数
+// 3.在给定的人流输入和系统参数下，得出了电梯数量对性能指标的影响（见实习报告）
+// 4.在给定的人流输入和系统参数下，得出了高层梯、低层梯对系统性能指标的影响（见实习报告）
 
 #include<iostream>
 #include<iomanip>
@@ -42,16 +42,16 @@
 #pragma comment(lib,"winmm.lib")
 
 #define MIN_MAXLOAD 5
-#define MAX_MAXLOAD 20 // ÿ�����ݵ�����صķ�Χ��5��20
+#define MAX_MAXLOAD 20 // 每辆电梯的最大负载的范围从5到20
 #define MIN_FLOOR_NUM 2
-#define MAX_FLOOR_NUM 40 // ¥�������ķ�Χ��2��40
+#define MAX_FLOOR_NUM 40 // 楼层总数的范围从2到40
 #define MIN_LIFT_NUM 1
-#define MAX_LIFT_NUM 13 // ���������ķ�Χ��1��13
+#define MAX_LIFT_NUM 13 // 电梯数量的范围从1到13
 #define MIN_LAMBDA 0.1
-#define MAX_LAMBDA 20 // ���ɲ����ķ�Χ��0.1��20
-#define MAX_NEW_PASSENGER 100 // ÿ���³��ֵĳ˿����Ϊ100��
-#define MAX_PASSTIME 400 // ����ģ�����ʾ���ʱ��Ϊ400�루�������ָ����ģ����������ʱ�������ʵʱ�䣩
-#define NORMAL 0 // ����ɫ����ͬ
+#define MAX_LAMBDA 20 // 泊松参数的范围从0.1到20
+#define MAX_NEW_PASSENGER 100 // 每秒新出现的乘客最多为100人
+#define MAX_PASSTIME 400 // 快速模拟和演示的最长时间为400秒（这里的秒指电梯模拟器的虚拟时间而非现实时间）
+#define NORMAL 0 // 调颜色，下同
 #define INFO 1
 #define BLANK 2
 #define DOWN 3
@@ -59,48 +59,48 @@
 #define OPEN 5
 #define BUTTON 6
 #define TABLE 7
-#define SCREEN_WIDTH 168 // ��Ļ����
-#define SCREEN_HEIGHT 57 // ��Ļ�߶�
-#define WINDOW_WIDTH 167 // ���ڿ���
-#define WINDOW_HEIGHT 43 // ���ڸ߶�
+#define SCREEN_WIDTH 168 // 屏幕宽度
+#define SCREEN_HEIGHT 57 // 屏幕高度
+#define WINDOW_WIDTH 167 // 窗口宽度
+#define WINDOW_HEIGHT 43 // 窗口高度
 #define SECONDS_PER_HOUR 3600.0
 
 using namespace std;
 
 double maximum(double,double); 
-// ���������������ֵ����������Ϊx��y������x��y�����ֵ
+// 计算两个数的最大值，两个参数为x和y，返回x和y的最大值
 double minimum(double,double); 
-// ��������������Сֵ����������Ϊx��y������x��y����Сֵ
+// 计算两个数的最小值，两个参数为x和y，返回x和y的最小值
 double average(double,double); 
-// ������������ƽ��ֵ����������Ϊx��y������x��y��ƽ��ֵ
+// 计算两个数的平均值，两个参数为x和y，返回x和y的平均值
 double poisson(double,int); 
-// ���㲴�ɷֲ��ĸ���ֵ����һ������Ϊ�ˣ��ڶ�������Ϊk������exp(-��)*(��^k)/(k!)
+// 计算泊松分布的概率值，第一个参数为λ，第二个参数为k，返回exp(-λ)*(λ^k)/(k!)
 void play(int); 
-// �������֣�����Ϊ0��17������������Ϊ0ʱ�����ţ�������0ʱ����ĳһƵ�ʵ���
+// 播放音乐，参数为0到17的整数，参数为0时不播放，参数非0时播放某一频率的音
 void calcpk(double,double[]); 
-// ����ÿһ���������ĳ˿͵������ĸ���ֵ����һ������Ϊ�ˣ��������Ľ�������ڵڶ���������������
+// 计算每一秒钟新增的乘客的人数的概率值，第一个参数为λ，将计算后的结果保存在第二个参数的数组中
 int createpassenger(int,int,double[]); 
-// ���ݸ���ֵ�����³˿ͣ���һ������Ϊ¥���������ڶ�������Ϊ��ǰ�ĳ˿�������������������Ϊ֮ǰ����ĸ���ֵ������ֵΪ֮��ĳ˿�������
+// 根据概率值产生新乘客，第一个参数为楼层总数，第二个参数为此前的乘客总人数，第三个参数为之前计算的概率值，返回值为之后的乘客总人数
 int recreatepassenger(int,int[]); 
-// �ڲ�ͬ�㷨�Ŀ���ģ��͸����㷨����ʾ�����²���֮ǰ�����ĳ˿�������һ������Ϊ��ǰ�ĳ˿����������ڶ�������Ϊÿ��¥�����ĳ˿�����������ֵΪ֮��ĳ˿�������
+// 在不同算法的快速模拟和各个算法的演示中重新产生之前产生的乘客流，第一个参数为此前的乘客总人数，第二个参数为每层楼新增的乘客人数，返回值为之后的乘客总人数
 void calc(int);
-// �����ܵȴ�ʱ�䡢�������ȸ������ݣ�����Ϊ��ǰ�ĳ˿�������
+// 计算总等待时间、客流量等各个数据，参数为当前的乘客总人数
 void print(int,int,int,int,int,int[],int[],int[]);
-// �����������������Ϊ���״̬�����õ��㷨��¥��������������������ǰ�˿���������ÿ��¥�����ĳ˿�������ÿ��¥�뿪�ĳ˿�������ÿ��¥�ϵ��ݵĳ˿�����
+// 输出函数，参数依次为输出状态、采用的算法、楼层总数、电梯总数、当前乘客总人数、每层楼新增的乘客人数、每层楼离开的乘客人数、每层楼上电梯的乘客人数
 void goonlift(int,int,int,int[],list<int>::iterator);
-// ��˿��ϵ��ݣ���������Ϊ������š�����¥�㡢�˿���š�ÿ��¥�ϵ��ݵĳ˿�������ÿ��¥�ȴ��ĳ˿����еĵ�����
+// 令乘客上电梯，参数依次为电梯序号、所在楼层、乘客序号、每层楼上电梯的乘客人数、每层楼等待的乘客序列的迭代器
 void operate(int,int,int,int,int[],int[]);
-// ���ȵ��ݣ���������Ϊ���õ��㷨��¥��������������������������ء�ÿ��¥�ϵ��ݵĳ˿�������ÿ��¥�뿪�ĳ˿�����
+// 调度电梯，参数依次为采用的算法、楼层总数、电梯总数、电梯最大负载、每层楼上电梯的乘客人数、每层楼离开的乘客人数
 void setcolor(int);
-// �ı䱳����ɫ��������ɫ������Ϊ��ɫ����
+// 改变背景颜色和字体颜色，参数为颜色方案
 void clearscreen(int,int,int,double);
-// ��ÿ����ʾǰ��������������Ϊ¥��������������������������ء����ɲ�����
+// 在每次演示前清屏，参数依次为楼层总数、电梯总数、电梯最大负载、泊松参数λ
 
 class PASSENGER
 {
 public:
 	int from,to,createtime,onlifttime,leavetime;
-	// from��ʾ�˿����Ĳ�¥���֣�to��ʾ�˿͵�Ŀ��¥�㣬createtime��ʾ�˿ͳ��ֵ�ʱ�䣬onlifttime��ʾ�˿ͽ����ݵ�ʱ�䣬leavetime��ʾ�˿��뿪���ݵ�ʱ��
+	// from表示乘客在哪层楼出现，to表示乘客的目的楼层，createtime表示乘客出现的时间，onlifttime表示乘客进电梯的时间，leavetime表示乘客离开电梯的时间
 	PASSENGER(const int f,const int t,const int c)
 	{
 		from=f;
@@ -118,7 +118,7 @@ class FLOOR
 {
 public:
 	list<int> lstp;
-	// lstp��¼�ڸò�¥�ȴ��ĳ˿͵����
+	// lstp记录在该层楼等待的乘客的序号
 	void init()
 	{
 		lstp.clear();
@@ -129,11 +129,11 @@ class LIFT
 {
 public:
 	bool stop[MAX_FLOOR_NUM+1];
-	// stop��ʾ�����Ƿ�Ӧ����ĳ��¥ͣ��Ҳ������Ϊ�����ڵĳ˿��Ƿ���ĳ��¥�İ�ť��
+	// stop表示电梯是否应该在某层楼停（也可理解为电梯内的乘客是否按了某层楼的按钮）
 	int flor,target,formerfloor;
-	// flor��ʾ���ݵ�ǰ����¥�㣬targetΪ���ݵ�Ŀ��¥�㣬formerfloor��ʾ��������һ�����ڵ�¥��
+	// flor表示电梯当前所在楼层，target为电梯的目的楼层，formerfloor表示电梯在上一秒所在的楼层
 	list<int> lstp;
-	// lstp��¼�ڸõ����ڵĳ˿͵����
+	// lstp记录在该电梯内的乘客的序号
 	LIFT()
 	{
 		target=formerfloor=0;
@@ -151,17 +151,17 @@ public:
 	}
 };
 
-HANDLE hOut; // ������
-COORD pos={0,0}; // ���λ��
-HMIDIOUT handle; // ��Ƶ������
-unsigned long result=midiOutOpen(&handle,0,0,0,CALLBACK_NULL); // ��ȡ��Ƶ������
-vector<PASSENGER> passenger; // �˿�����
-FLOOR flor[MAX_FLOOR_NUM+1]; // ¥��
-LIFT lift[MAX_LIFT_NUM+1]; // ����
+HANDLE hOut; // 输出句柄
+COORD pos={0,0}; // 光标位置
+HMIDIOUT handle; // 音频输出句柄
+unsigned long result=midiOutOpen(&handle,0,0,0,CALLBACK_NULL); // 获取音频输出句柄
+vector<PASSENGER> passenger; // 乘客序列
+FLOOR flor[MAX_FLOOR_NUM+1]; // 楼层
+LIFT lift[MAX_LIFT_NUM+1]; // 电梯
 int passtime=0,passengerwaiting=0,passengerin=0,passengerout=0,totalwaitingtime=0,totalduration=0;
-// passtime:��ǰʱ�� passengerwaiting:���ڵȺ�ĳ˿����� passengerin:���ڳ��ݵĳ˿����� passengerout:���뿪���ݵĳ˿�����
+// passtime:当前时间 passengerwaiting:正在等候的乘客人数 passengerin:正在乘梯的乘客人数 passengerout:已离开电梯的乘客人数
 double averagewaitingtime,averageduration;
-// totalwaitingtime:���г˿͵ȴ�������ʱ�� averagewaitingtime:�˾��ȴ�����ʱ�� totalduration:���г˿ͳ�����ʱ�� averageduration:�˾�����ʱ��
+// totalwaitingtime:所有乘客等待电梯总时间 averagewaitingtime:人均等待电梯时间 totalduration:所有乘客乘梯总时间 averageduration:人均乘梯时间
 
 double maximum(const double x,const double y)
 {
@@ -203,8 +203,8 @@ void calcpk(const double lambda,double pk[])
 	}
 	for(i=0;i<=MAX_NEW_PASSENGER;i++)
 	{
-		pk[i]/=sum; // ���������ֵ���Ϊ1
-		if(i>0)pk[i]+=pk[i-1]; // Ϊ�������������������ֵ�ۼ�����
+		pk[i]/=sum; // 令各个概率值相加为1
+		if(i>0)pk[i]+=pk[i-1]; // 为方便随机处理，将概率值累加起来
 	}
 }
 
@@ -214,12 +214,12 @@ int createpassenger(const int floornum,int passengernum,double pk[])
 	double pr=rand()%30000/30000.0;
 	for(i=0;i<=MAX_NEW_PASSENGER;i++)
 	{
-		if(pk[i]>pr) // �����������ĳһ����ʱ�������Ӹ������Ӧ������
+		if(pk[i]>pr) // 当随机数落在某一区间时，就增加该区间对应的人数
 		{
 			for(j=1;j<=i;j++)
 			{
 				int f=rand()%floornum+1,t=rand()%floornum+1;
-				while(f==t) // ����Ŀ�ĵغ͡�������¥��һ��
+				while(f==t) // 避免目的地和“出生”楼层一样
 					t=rand()%floornum+1;
 				passenger.push_back(PASSENGER(f,t,passtime));
 				passengernum++;
@@ -299,7 +299,7 @@ void print(const int t,const int opt,const int floornum,const int liftnum,const 
 	int i,j,sleeptime;
 	list<int>::iterator iter;
 	time_t tmptime=clock();
-	if(t==1) // ���ÿ��¥�³��ֵĳ˿�������������ϵ��ݵ��������뿪������
+	if(t==1) // 输出每层楼新出现的乘客人数，不输出上电梯的人数和离开的人数
 	{
 		for(i=2;i<=floornum+1;i++)
 		{
@@ -321,7 +321,7 @@ void print(const int t,const int opt,const int floornum,const int liftnum,const 
 			else cout<<"    ";
 		}
 	}
-	else // ���ÿ��¥�ϵ��ݵĳ˿��������뿪�ĳ˿�������������³��ֵĳ˿�����
+	else // 输出每层楼上电梯的乘客人数和离开的乘客人数，不输出新出现的乘客人数
 	{
 		for(i=2;i<=floornum+1;i++)
 		{
@@ -355,13 +355,13 @@ void print(const int t,const int opt,const int floornum,const int liftnum,const 
 				else if(passenger[*iter].to<floornum+2-i)tdown=1;
 				if(tup&&tdown||(tup&&i==floornum+1)||(tdown&&i==2))break;
 			}
-			if(tup)cout<<"��";
+			if(tup)cout<<"上";
 			else cout<<"  ";
-			if(tdown)cout<<"��";
+			if(tdown)cout<<"下";
 			else cout<<"  ";
 		}
 	}
-	for(i=2;i<=floornum+1;i++) // ���ÿ��¥���ڵȺ�ĳ˿�����
+	for(i=2;i<=floornum+1;i++) // 输出每层楼正在等候的乘客人数
 	{
 		pos.X=11;
 		pos.Y=i;
@@ -369,7 +369,7 @@ void print(const int t,const int opt,const int floornum,const int liftnum,const 
 		if(flor[floornum+2-i].lstp.size()<100)cout<<setw(3)<<flor[floornum+2-i].lstp.size();
 		else cout<<setw(4)<<flor[floornum+2-i].lstp.size();
 	}
-	for(i=1;i<=liftnum;i++) // ���ÿ�����ݵ��˶�״̬�����صĳ˿�������
+	for(i=1;i<=liftnum;i++) // 输出每辆电梯的运动状态、运载的乘客人数等
 	{
 		if(t==1&&!lift[i].formerfloor)
 		{
@@ -377,7 +377,7 @@ void print(const int t,const int opt,const int floornum,const int liftnum,const 
 			pos.X=19+10*i;
 			pos.Y=floornum+2-lift[i].flor;
 			SetConsoleCursorPosition(hOut,pos);
-			cout<<"��"<<setw(2)<<lift[i].lstp.size()<<"��  ";
+			cout<<"【"<<setw(2)<<lift[i].lstp.size()<<"】  ";
 		}
 		else if(t==2)
 		{
@@ -391,7 +391,7 @@ void print(const int t,const int opt,const int floornum,const int liftnum,const 
 			if(lift[i].flor==lift[i].formerfloor)
 			{
 				setcolor(OPEN);
-				cout<<"��"<<setw(2)<<lift[i].lstp.size()<<"���_";
+				cout<<"【"<<setw(2)<<lift[i].lstp.size()<<"】開";
 				setcolor(BUTTON);
 				for(j=1;j<=floornum;j++)
 				{
@@ -407,68 +407,68 @@ void print(const int t,const int opt,const int floornum,const int liftnum,const 
 			else if(lift[i].flor<lift[i].formerfloor)
 			{
 				setcolor(DOWN);
-				cout<<"��"<<setw(2)<<lift[i].lstp.size()<<"����";
+				cout<<"【"<<setw(2)<<lift[i].lstp.size()<<"】↓";
 			}
 			else
 			{
 				setcolor(UP);
-				cout<<"��"<<setw(2)<<lift[i].lstp.size()<<"����";
+				cout<<"【"<<setw(2)<<lift[i].lstp.size()<<"】↑";
 			}
 			setcolor(NORMAL);
 		}
 	}
 	pos.X=0;
 	pos.Y=floornum+3;
-	SetConsoleCursorPosition(hOut,pos); // �����ǰʱ�������
+	SetConsoleCursorPosition(hOut,pos); // 输出当前时间等数据
 	setcolor(INFO);
-	cout<<"   ��ǰ�㷨��"<<setw(7)<<opt<<"   ";
-	cout<<"     ��ǰʱ�䣺"<<setw(9)<<passtime<<" s  ";
-	cout<<"�˿���������"<<setw(9)<<passengernum<<"  ";
-	cout<<"    �Ⱥ���������"<<setw(9)<<passengerwaiting<<"  ";
-	cout<<"  ������������"<<setw(6)<<passengerin<<"��    ";
-	cout<<"  �뿪��������"<<setw(6)<<passengerout<<"  "<<endl;
-	cout<<" �ܵȺ�ʱ�䣺"<<setw(7)<<totalwaitingtime<<" s  ";
-	cout<<"�˾��Ⱥ�ʱ�䣺"<<setw(9)<<averagewaitingtime<<" s  ";
-	cout<<"�ܳ���ʱ�䣺"<<setw(9)<<totalduration<<" s  ";
-	cout<<"�˾�����ʱ�䣺"<<setw(9)<<averageduration<<" s  ";
-	cout<<"ÿ�������ؿ�������"<<setw(9)<<SECONDS_PER_HOUR*passengerout/liftnum/passtime<<" ��/Сʱ                  ";
+	cout<<"   当前算法："<<setw(7)<<opt<<"   ";
+	cout<<"     当前时间："<<setw(9)<<passtime<<" s  ";
+	cout<<"乘客总人数："<<setw(9)<<passengernum<<"  ";
+	cout<<"    等候总人数："<<setw(9)<<passengerwaiting<<"  ";
+	cout<<"  乘梯总人数："<<setw(6)<<passengerin<<"　    ";
+	cout<<"  离开总人数："<<setw(6)<<passengerout<<"  "<<endl;
+	cout<<" 总等候时间："<<setw(7)<<totalwaitingtime<<" s  ";
+	cout<<"人均等候时间："<<setw(9)<<averagewaitingtime<<" s  ";
+	cout<<"总乘梯时间："<<setw(9)<<totalduration<<" s  ";
+	cout<<"人均乘梯时间："<<setw(9)<<averageduration<<" s  ";
+	cout<<"每辆电梯载客流量："<<setw(9)<<SECONDS_PER_HOUR*passengerout/liftnum/passtime<<" 人/小时                  ";
 	setcolor(NORMAL);
 	//play(rand()%17);
 	sleeptime=100*t-clock()+tmptime;
-	if(sleeptime>0)Sleep(sleeptime); // ��ͣ��һ��
+	if(sleeptime>0)Sleep(sleeptime); // 略停顿一下
 }
 
 void goonlift(const int liftid,const int floorid,const int passengerid,int onlift[],list<int>::iterator iter)
 {
 	passenger[passengerid].onlifttime=passtime;
-	lift[liftid].lstp.push_back(passengerid); // ���ó˿ͼ�����ݵĳ˿�������
+	lift[liftid].lstp.push_back(passengerid); // 将该乘客加入电梯的乘客序列中
 	lift[liftid].stop[passenger[passengerid].to]=1;
 	onlift[floorid]++;
-	flor[floorid].lstp.erase(iter); // ���ó˿ʹӸ�¥��ĵȴ�������ɾ��
+	flor[floorid].lstp.erase(iter); // 将该乘客从该楼层的等待序列中删除
 }
 
 void operate(const int t,const int floornum,const int liftnum,const int maxload,int onlift[],int leave[])
 {
-	// ���������㷨����Ϊ��1���ڣ�����Ҫô���ϣ�Ҫô���£�Ҫô����
-	// ���������㷨�����������ڵ�¥���г˿�Ҫ�뿪�����뿪�ŷ���
-	// �㷨1�����Ⱥ�ĳ˿͵�Ŀ�ĵ�������ڵĳ˿͵�Ŀ�ĵ����ظ�ʱ�����ߵȺ��ߵ�Ŀ�ĵظ�Զʱ��������ͣ�����˵ĵ��ݲ������ó˿ͽ���
-	// �㷨2��ֻҪ�˿͵�Ŀ�ĵط�����/�£�����ݵ��˶�����һ�£��������ó˿ͽ���
-	// �㷨3��ֻҪ�г˿��ڵȺ������˶����򣬶������ó˿ͽ���
-	// �㷨4���ڿ��ŵ�ѡ���Ϻ��㷨2һ�£���֮ͬ���������۵����Ƿ����˶��ϵ������µ���ײ�ŷ���
+	// 对于所有算法：认为在1秒内，电梯要么往上，要么往下，要么开门
+	// 对于所有算法：当电梯所在的楼层有乘客要离开，必须开门放人
+	// 算法1：当等候的乘客的目的地与电梯内的乘客的目的地有重复时，或者等候者的目的地更远时，才允许停下载人的电梯并开门让乘客进入
+	// 算法2：只要乘客的目的地方向（上/下）与电梯的运动方向一致，即开门让乘客进入
+	// 算法3：只要有乘客在等候，无论运动方向，都开门让乘客进入
+	// 算法4：在开门的选择上和算法2一致，不同之处在于无论电梯是否载人都上到最顶层或下到最底层才反向
 	int i,j,k,target[MAX_FLOOR_NUM+1]={0},fartarget;
-	bool opendoor[MAX_LIFT_NUM+1]={0},move[MAX_LIFT_NUM+1]={0}; // opendoor��ǵ����Ƿ��ţ�move��ǵ����Ƿ��ƶ�
+	bool opendoor[MAX_LIFT_NUM+1]={0},move[MAX_LIFT_NUM+1]={0}; // opendoor标记电梯是否开门，move标记电梯是否移动
 	list<int>::iterator iter,iter2;
 	for(i=1;i<=floornum;i++)
 		onlift[i]=leave[i]=0;
 	for(i=1;i<=liftnum;i++)
 		lift[i].formerfloor=lift[i].flor;
-	if(t==4&&passtime==1) // �㷨4��ֱ��ֱ��
+	if(t==4&&passtime==1) // 算法4：直上直下
 	{
 		for(i=1;i<=liftnum;i++)
 			if(i%2)lift[i].target=floornum;
 			else lift[i].target=1;
 	}
-	for(i=1;i<=liftnum;i++) // ���������г˿��ڸò�¥��Ҫ�뿪ʱ��������
+	for(i=1;i<=liftnum;i++) // 当电梯内有乘客在该层楼需要离开时，即开门
 	{
 		j=lift[i].flor;
 		if(lift[i].stop[j])
@@ -487,7 +487,7 @@ void operate(const int t,const int floornum,const int liftnum,const int maxload,
 					leave[j]++;
 				}
 			}
-			if(t!=4) // ���㷨4��������ʱû��Ŀ��¥��
+			if(t!=4) // 非算法4：电梯暂时没有目的楼层
 			{
 				if(lift[i].lstp.empty())lift[i].target=0;
 				else if(lift[i].target==j)
@@ -503,9 +503,9 @@ void operate(const int t,const int floornum,const int liftnum,const int maxload,
 			}
 		}
 	}
-	for(i=1;i<=liftnum;i++) // ������Ϊ���������ڵ�������¥��Ⱥ�ʱ�������ó˿ͽ���
+	for(i=1;i<=liftnum;i++) // 当电梯为空且有人在电梯所在楼层等候时，开门让乘客进入
 	{
-		if(t==4&&lift[i].lstp.empty()&&!flor[lift[i].flor].lstp.empty()) // �㷨4����ͬ��ĳ˿ͽ���
+		if(t==4&&lift[i].lstp.empty()&&!flor[lift[i].flor].lstp.empty()) // 算法4：让同向的乘客进入
 		{
 			j=lift[i].flor;
 			for(iter=flor[j].lstp.begin();iter!=flor[j].lstp.end(); )
@@ -520,7 +520,7 @@ void operate(const int t,const int floornum,const int liftnum,const int maxload,
 				if(lift[i].lstp.size()>=maxload)break;
 			}
 		}
-		else if(lift[i].lstp.empty()&&!flor[lift[i].flor].lstp.empty()) // ���㷨4����ͬһ�������ĳ˿ͽ���
+		else if(lift[i].lstp.empty()&&!flor[lift[i].flor].lstp.empty()) // 非算法4：让同一方向更多的乘客进入
 		{
 			int upnum=0,up2=0,downnum=0,down2=0;
 			j=lift[i].flor;
@@ -572,7 +572,7 @@ void operate(const int t,const int floornum,const int liftnum,const int maxload,
 				}
 				if(fartarget<lift[i].target||!lift[i].target)lift[i].target=fartarget;
 			}
-			if(t==3&&lift[i].lstp.size()<maxload&&!flor[j].lstp.empty()) // �㷨3����������ĳ˿�Ҳ����
+			if(t==3&&lift[i].lstp.size()<maxload&&!flor[j].lstp.empty()) // 算法3：允许反向的乘客也进入
 			{
 				for(iter=flor[j].lstp.begin();iter!=flor[j].lstp.end(); )
 				{
@@ -586,9 +586,9 @@ void operate(const int t,const int floornum,const int liftnum,const int maxload,
 			opendoor[i]=1;
 		}
 	}
-	for(i=1;i<=liftnum;i++) // ���յ���֮ǰû�п���ʱ���˶�ȥ����¥��
+	for(i=1;i<=liftnum;i++) // 当空电梯之前没有开门时，运动去其他楼层
 	{
-		if(t==4&&!opendoor[i]&&lift[i].lstp.empty()) // �㷨4��ֱ��ֱ��
+		if(t==4&&!opendoor[i]&&lift[i].lstp.empty()) // 算法4：直上直下
 		{
 			if(lift[i].target>lift[i].flor)
 			{
@@ -603,7 +603,7 @@ void operate(const int t,const int floornum,const int liftnum,const int maxload,
 				if(lift[i].flor==1)lift[i].target=floornum;
 			}
 		}
-		else if(!opendoor[i]&&lift[i].lstp.empty()) // ���㷨4����������¥��Ⱥ�ĳ˿����ѡ�����ϻ�����
+		else if(!opendoor[i]&&lift[i].lstp.empty()) // 非算法4：根据其他楼层等候的乘客情况选择往上或往下
 		{
 			k=0;
 			for(j=1;j<=floornum;j++)
@@ -632,7 +632,7 @@ void operate(const int t,const int floornum,const int liftnum,const int maxload,
 			}
 		}
 	}
-	for(i=1;i<=liftnum;i++) // �ǿյ���ѡ���Ż����ƶ�
+	for(i=1;i<=liftnum;i++) // 非空电梯选择开门或者移动
 	{
 		j=lift[i].flor;
 		if(!move[i]&&!lift[i].lstp.empty())
@@ -734,14 +734,14 @@ void operate(const int t,const int floornum,const int liftnum,const int maxload,
 
 void setcolor(const int i)
 {
-	if(i==NORMAL)SetConsoleTextAttribute(hOut,FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE);// �ڵװ���
-	else if(i==INFO)SetConsoleTextAttribute(hOut,BACKGROUND_INTENSITY|BACKGROUND_GREEN|BACKGROUND_RED|BACKGROUND_BLUE);// �׵׺���
-	else if(i==BLANK)SetConsoleTextAttribute(hOut,BACKGROUND_GREEN|BACKGROUND_RED);// �ص׺���
-	else if(i==DOWN)SetConsoleTextAttribute(hOut,BACKGROUND_INTENSITY|BACKGROUND_BLUE|FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE);// ���װ���
-	else if(i==UP)SetConsoleTextAttribute(hOut,BACKGROUND_INTENSITY|BACKGROUND_RED|FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE);// ��װ���
-	else if(i==OPEN)SetConsoleTextAttribute(hOut,BACKGROUND_GREEN|FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE);// �̵װ���
-	else if(i==BUTTON)SetConsoleTextAttribute(hOut,FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_RED);// �ڵ׻���
-	else if(i==TABLE)SetConsoleTextAttribute(hOut,BACKGROUND_BLUE|BACKGROUND_RED|FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE);// �ϵװ���
+	if(i==NORMAL)SetConsoleTextAttribute(hOut,FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE);// 黑底白字
+	else if(i==INFO)SetConsoleTextAttribute(hOut,BACKGROUND_INTENSITY|BACKGROUND_GREEN|BACKGROUND_RED|BACKGROUND_BLUE);// 白底黑字
+	else if(i==BLANK)SetConsoleTextAttribute(hOut,BACKGROUND_GREEN|BACKGROUND_RED);// 棕底黑字
+	else if(i==DOWN)SetConsoleTextAttribute(hOut,BACKGROUND_INTENSITY|BACKGROUND_BLUE|FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE);// 蓝底白字
+	else if(i==UP)SetConsoleTextAttribute(hOut,BACKGROUND_INTENSITY|BACKGROUND_RED|FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE);// 红底白字
+	else if(i==OPEN)SetConsoleTextAttribute(hOut,BACKGROUND_GREEN|FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE);// 绿底白字
+	else if(i==BUTTON)SetConsoleTextAttribute(hOut,FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_RED);// 黑底黄字
+	else if(i==TABLE)SetConsoleTextAttribute(hOut,BACKGROUND_BLUE|BACKGROUND_RED|FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE);// 紫底白字
 }
 
 void clearscreen(const int floornum,const int liftnum,const int maxload,const double lambda)
@@ -750,35 +750,35 @@ void clearscreen(const int floornum,const int liftnum,const int maxload,const do
 	pos.X=pos.Y=0;
 	SetConsoleCursorPosition(hOut,pos);
 	setcolor(NORMAL);
-	cout<<" ��";
+	cout<<" Ｆ";
 	setcolor(BLANK);
-	cout<<"��";
+	cout<<"︱";
 	setcolor(NORMAL);
-	cout<<"����";
+	cout<<"新增";
 	setcolor(BLANK);
-	cout<<"��";
+	cout<<"︱";
 	setcolor(NORMAL);
-	cout<<"�Ⱥ�";
+	cout<<"等候";
 	setcolor(BLANK);
-	cout<<"��";
+	cout<<"︱";
 	setcolor(NORMAL);
-	cout<<"��ť";
+	cout<<"按钮";
 	setcolor(BLANK);
-	cout<<"��";
+	cout<<"︱";
 	setcolor(NORMAL);
-	cout<<"����";
+	cout<<"上梯";
 	setcolor(BLANK);
-	cout<<"��";
+	cout<<"︱";
 	int i,j;
 	for(i=1;i<=liftnum;i++)
 	{
 		setcolor(NORMAL);
-		cout<<" ����"<<setw(2)<<i<<" ";
+		cout<<" 电梯"<<setw(2)<<i<<" ";
 		setcolor(BLANK);
-		cout<<"��";
+		cout<<"︱";
 	}
 	setcolor(NORMAL);
-	cout<<"�뿪"<<endl;
+	cout<<"离开"<<endl;
 	setcolor(BLANK);
 	for(i=1;i<=33+10*liftnum;i++)
 		cout<<"-";
@@ -788,29 +788,29 @@ void clearscreen(const int floornum,const int liftnum,const int maxload,const do
 	{
 		cout<<" "<<setw(2)<<i;
 		setcolor(BLANK);
-		cout<<"��";
+		cout<<"︱";
 		setcolor(NORMAL);
 		cout<<"    ";
 		setcolor(BLANK);
-		cout<<"��";
+		cout<<"︱";
 		setcolor(NORMAL);
 		cout<<"    ";
 		setcolor(BLANK);
-		cout<<"��";
+		cout<<"︱";
 		setcolor(NORMAL);
 		cout<<"    ";
 		setcolor(BLANK);
-		cout<<"��";
+		cout<<"︱";
 		setcolor(NORMAL);
 		cout<<"    ";
 		setcolor(BLANK);
-		cout<<"��";
+		cout<<"︱";
 		for(j=1;j<=liftnum;j++)
 		{
 			setcolor(NORMAL);
 			cout<<"        ";
 			setcolor(BLANK);
-			cout<<"��";
+			cout<<"︱";
 		}
 		setcolor(NORMAL);
 		cout<<endl;
@@ -823,12 +823,12 @@ void clearscreen(const int floornum,const int liftnum,const int maxload,const do
 	setcolor(INFO);
 	for(i=1;i<=SCREEN_WIDTH*2;i++)
 		cout<<" ";
-	cout<<"     �ܲ�����"<<setw(7)<<floornum<<"  ";
-	cout<<"      ����������"<<setw(9)<<liftnum<<"  ";
-	cout<<"    ����أ�"<<setw(9)<<maxload<<"  ";
-	cout<<"    ���ɲ����ˣ�"<<setw(9)<<lambda<<"  ";
-	cout<<"  ���ճ˿�������"<<setw(6)<<passenger.size()<<"  ";
-	cout<<"    ��ģ��ʱ�䣺"<<setw(6)<<MAX_PASSTIME<<" s                   ";
+	cout<<"     总层数："<<setw(7)<<floornum<<"  ";
+	cout<<"      电梯数量："<<setw(9)<<liftnum<<"  ";
+	cout<<"    最大负载："<<setw(9)<<maxload<<"  ";
+	cout<<"    泊松参数λ："<<setw(9)<<lambda<<"  ";
+	cout<<"  最终乘客总数："<<setw(6)<<passenger.size()<<"  ";
+	cout<<"    总模拟时间："<<setw(6)<<MAX_PASSTIME<<" s                   ";
 	setcolor(NORMAL);
 }
 
@@ -836,48 +836,48 @@ int main()
 {
 	int passengernum=0,liftnum,floornum,maxload,i,j,k,opt,maxtwt,mintwt,maxtd,mintd,maxpass,minpass,order[5]={0,1,2,3,4};
 	int totalwt[5],totald[5],passout[5],add[MAX_FLOOR_NUM+1]={0},leave[MAX_FLOOR_NUM+1],onlift[MAX_FLOOR_NUM+1];
-	// passengernum:��ǰ���ֹ��ĳ˿������� liftnum:�������� floornum:¥������ maxload:����� opt:ѡ����㷨
-	// maxtwt:��ܵȴ�ʱ�� mintwt:����ܵȴ�ʱ�� maxtd:��ܳ���ʱ�� mintd:����ܳ���ʱ�� maxpass:����ܿ����� minpass:��С�ܿ�����
-	// order:�����㷨�������� totalwt:�����㷨���ܵȴ�ʱ�� totald:�����㷨���ܳ���ʱ�� passout:�����㷨���ܿ�����
-	// add:ĳһ�����¥�³��ֵĳ˿����� leave:ĳһ�����¥�뿪���ݵĳ˿����� onlift:ĳһ�����¥�ϵ��ݵĳ˿�����
+	// passengernum:当前出现过的乘客总人数 liftnum:电梯数量 floornum:楼层总数 maxload:最大负载 opt:选择的算法
+	// maxtwt:最长总等待时间 mintwt:最短总等待时间 maxtd:最长总乘梯时间 mintd:最短总乘梯时间 maxpass:最大总客流量 minpass:最小总客流量
+	// order:用于算法优劣排序 totalwt:各种算法的总等待时间 totald:各种算法的总乘梯时间 passout:各种算法的总客流量
+	// add:某一秒各层楼新出现的乘客人数 leave:某一秒各层楼离开电梯的乘客人数 onlift:某一秒各层楼上电梯的乘客人数
 	double lambda,avgwt[5],avgd[5],passperhour[5],avgtwt,avgtd,avgpass,avgawt,avgad,avgpph,maxawt,minawt,maxad,minad,maxpph,minpph;
 	double pk[MAX_NEW_PASSENGER+1];
-	// lambda:���ɲ����� avgwt:�����㷨���˾��ȴ�ʱ�� avgd:�����㷨���˾�����ʱ�� passperhour:�����㷨��ÿ�����ݵ�λʱ���ؿ����� pk:�³��ֵĳ˿����ĸ�����ֵ
-	// avgtwt:ƽ���ܵȴ�ʱ�� avgtd:ƽ���ܳ���ʱ�� avgpass:ƽ���ܿ����� avgawt:ƽ���˾��ȴ�ʱ�� avgad:ƽ���˾�����ʱ�� avgpph:ƽ���ؿ�����
-	// max_/min_:��һ�и����ݵ����/��Сֵ
+	// lambda:泊松参数λ avgwt:各种算法的人均等待时间 avgd:各种算法的人均乘梯时间 passperhour:各种算法的每辆电梯单位时间载客流量 pk:新出现的乘客数的各概率值
+	// avgtwt:平均总等待时间 avgtd:平均总乘梯时间 avgpass:平均总客流量 avgawt:平均人均等待时间 avgad:平均人均乘梯时间 avgpph:平均载客流量
+	// max_/min_:上一行各数据的最大/最小值
 	time_t starttime;
-	srand(unsigned(time(0))); // ��ʼ���������
+	srand(unsigned(time(0))); // 初始化随机种子
 	hOut=GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTitle("����ģ����"); // �趨���ڱ���
+	SetConsoleTitle("电梯模拟器"); // 设定窗口标题
 	COORD size={SCREEN_WIDTH,SCREEN_HEIGHT};
 	SetConsoleScreenBufferSize(hOut,size);
 	SMALL_RECT rc={0,0,WINDOW_WIDTH,WINDOW_HEIGHT};
-	SetConsoleWindowInfo(hOut,true,&rc); // �趨���ڴ�С
+	SetConsoleWindowInfo(hOut,true,&rc); // 设定窗口大小
 	HWND hwnd=GetForegroundWindow();
-	ShowWindow(hwnd,SW_MAXIMIZE); // ������
+	ShowWindow(hwnd,SW_MAXIMIZE); // 令窗口最大化
 	cout<<setprecision(7);
-	cout<<"���������������(5-20)���ܵ�����(1-13)����¥����(2-40)�����ɹ��̲�����(0.1-20)\n";
-	cin>>maxload>>liftnum>>floornum>>lambda; // ������������ء�����������¥�����������ɹ��̲�����
+	cout<<"请依次输入最大负载(5-20)、总电梯数(1-13)、总楼层数(2-40)、泊松过程参数λ(0.1-20)\n";
+	cin>>maxload>>liftnum>>floornum>>lambda; // 依次输入最大负载、电梯总数、楼层总数、泊松过程参数λ
 	CONSOLE_CURSOR_INFO ConsoleCursorInfo;
     GetConsoleCursorInfo(hOut,&ConsoleCursorInfo);
     ConsoleCursorInfo.bVisible=false;
-    SetConsoleCursorInfo(hOut,&ConsoleCursorInfo); // �趨����ʾ���
+    SetConsoleCursorInfo(hOut,&ConsoleCursorInfo); // 设定不显示光标
 	if(maxload<MIN_MAXLOAD||maxload>MAX_MAXLOAD||liftnum<MIN_LIFT_NUM||liftnum>MAX_LIFT_NUM||floornum<MIN_FLOOR_NUM||floornum>MAX_FLOOR_NUM||lambda<MIN_LAMBDA||lambda>MAX_LAMBDA)
 	{
-		cout<<"���ݲ����ʣ���������һ����Զ��˳�����"; // ���ݳ�����Χ�����벻�淶
+		cout<<"数据不合适，出错啦！一秒后自动退出程序"; // 数据超出范围或输入不规范
 		Sleep(1000);
 		return 0;
 	}
-	cout<<endl<<"�����������ݣ����Ժ�......"<<endl;
-	calcpk(lambda,pk); // ���������ֵ
+	cout<<endl<<"正在生成数据，请稍候......"<<endl;
+	calcpk(lambda,pk); // 计算各概率值
 	while(passtime<MAX_PASSTIME)
 	{
 		passtime++;
-		passengernum=createpassenger(floornum,passengernum,pk); // ���ɳ˿���
+		passengernum=createpassenger(floornum,passengernum,pk); // 生成乘客流
 	}
-	cout<<endl<<"���ڿ���ģ�⣬���Ժ�......"<<endl;
+	cout<<endl<<"正在快速模拟，请稍候......"<<endl;
 	starttime=clock();
-	for(i=1;i<=8;i++) // i<=4ʱΪ�����㷨�Ŀ���ģ�⣬i>=5ʱΪ�����㷨���ŵ��ӵ���ʾ
+	for(i=1;i<=8;i++) // i<=4时为各种算法的快速模拟，i>=5时为各种算法从优到劣的演示
 	{
 		for(j=1;j<=liftnum;j++)
 		{
@@ -891,26 +891,26 @@ int main()
 		else opt=order[i-4];
 		while(passtime<MAX_PASSTIME)
 		{
-			if(i<=4&&clock()-starttime>8000) // ��ǰ����ʱ�����������ڲ����ڴ˴���
+			if(i<=4&&clock()-starttime>8000) // 此前调试时曾出错，现在不存在此错误
 			{
-				cout<<endl<<"���ݲ����ʣ���������һ����Զ��˳�����"<<endl;
+				cout<<endl<<"数据不合适，出错啦！一秒后自动退出程序"<<endl;
 				Sleep(1000);
 				return 0;
 			}
 			passtime++;
 			for(j=1;j<=floornum;j++)
 				add[j]=0;
-			passengernum=recreatepassenger(passengernum,add); // �������ɳ˿���
+			passengernum=recreatepassenger(passengernum,add); // 重新生成乘客流
 			if(i>=5)
 			{
 				calc(passengernum);
-				print(1,opt,floornum,liftnum,passengernum,add,leave,onlift); // ��ʾʱ�������
+				print(1,opt,floornum,liftnum,passengernum,add,leave,onlift); // 演示时输出界面
 			}
-			operate(opt,floornum,liftnum,maxload,onlift,leave); // ���ȵ���
+			operate(opt,floornum,liftnum,maxload,onlift,leave); // 调度电梯
 			if(i>=5)
 			{
 				calc(passengernum);
-				print(2,opt,floornum,liftnum,passengernum,add,leave,onlift); // ��ʾʱ�������
+				print(2,opt,floornum,liftnum,passengernum,add,leave,onlift); // 演示时输出界面
 			}
 		}
 		calc(passengernum);
@@ -923,10 +923,10 @@ int main()
 			avgwt[i]=averagewaitingtime;
 			avgd[i]=averageduration;
 		}
-		if(i==4) // ���������������ֵ������ֵ��ƽ��ֵ�������ݸ����㷨���ؿ����Ը����㷨������������
+		if(i==4) // 计算各参数的最优值、最劣值、平均值，并依据各种算法的载客量对各种算法进行优劣排序
 		{
 			for(j=1;j<=4;j++)
-				for(k=j+1;k<=4;k++) // ���㷨���ӽ��������������ݹ�ģ��С���Բ���ð�ݷ���
+				for(k=j+1;k<=4;k++) // 对算法优劣进行排序（由于数据规模很小所以采用冒泡法）
 				{
 					if(passout[order[j]]<passout[order[k]]||(passout[order[j]]==passout[order[k]]&&avgwt[order[j]]+avgd[order[j]]>avgwt[order[k]]+avgd[order[k]]))
 					{
@@ -935,7 +935,7 @@ int main()
 						order[j]^=order[k];
 					}
 				}
-			// ��������ݵ�ƽ��ֵ�����ֵ����Сֵ
+			// 计算各数据的平均值、最大值、最小值
 			avgpass=average(average(passout[1],passout[2]),average(passout[3],passout[4]));
 			avgtwt=average(average(totalwt[1],totalwt[2]),average(totalwt[3],totalwt[4]));
 			avgtd=average(average(totald[1],totald[2]),average(totald[3],totald[4]));
@@ -988,7 +988,7 @@ int main()
 					for(j=3;j>=1;j--)
 					{
 						SetConsoleCursorPosition(hOut,pos);
-						cout<<"         "<<j<<"     ��    ��    ��    ��    ��    ��    ��    ��             ";
+						cout<<"         "<<j<<"     秒    后    自    动    退    出    程    序             ";
 						Sleep(1000);
 					}
 					return 0;
@@ -998,7 +998,7 @@ int main()
 					for(j=3;j>=1;j--)
 					{
 						SetConsoleCursorPosition(hOut,pos);
-						cout<<"         "<<j<<"     ��    ��    ģ    ��    ��    һ    ��    ��    ��       ";
+						cout<<"         "<<j<<"     秒    后    模    拟    下    一    种    算    法       ";
 						Sleep(1000);
 					}
 				}
@@ -1008,12 +1008,12 @@ int main()
 			setcolor(TABLE);
 			for(j=1;j<=SCREEN_WIDTH;j++)
 				cout<<" ";
-			cout<<"             �ܿ�����       ÿ�������ؿ�����(��/Сʱ)           �ܵȺ�ʱ��(s)        �˾��Ⱥ�ʱ��(s)          �ܳ���ʱ��(s)        �˾�����ʱ��(s)                      ";
+			cout<<"             总客流量       每辆电梯载客流量(人/小时)           总等候时间(s)        人均等候时间(s)          总乘梯时间(s)        人均乘梯时间(s)                      ";
 			for(j=1;j<=4;j++)
-				cout<<"  �㷨"<<j<<"  "<<setw(12)<<passout[j]<<"                "<<setw(12)<<passperhour[j]<<"              "<<setw(12)<<totalwt[j]<<"           "<<setw(12)<<avgwt[j]<<"           "<<setw(12)<<totald[j]<<"           "<<setw(12)<<avgd[j]<<"                        ";
-			cout<<"  ƽ��ֵ "<<setw(12)<<avgpass<<"                "<<setw(12)<<avgpph<<"              "<<setw(12)<<avgtwt<<"           "<<setw(12)<<avgawt<<"           "<<setw(12)<<avgtd<<"           "<<setw(12)<<avgad<<"                        ";
-			cout<<"  ����ֵ "<<setw(12)<<maxpass<<"                "<<setw(12)<<maxpph<<"              "<<setw(12)<<mintwt<<"           "<<setw(12)<<minawt<<"           "<<setw(12)<<mintd<<"           "<<setw(12)<<minad<<"                        ";
-			cout<<"  ����ֵ "<<setw(12)<<minpass<<"                "<<setw(12)<<minpph<<"              "<<setw(12)<<maxtwt<<"           "<<setw(12)<<maxawt<<"           "<<setw(12)<<maxtd<<"           "<<setw(12)<<maxad<<"                        ";
+				cout<<"  算法"<<j<<"  "<<setw(12)<<passout[j]<<"                "<<setw(12)<<passperhour[j]<<"              "<<setw(12)<<totalwt[j]<<"           "<<setw(12)<<avgwt[j]<<"           "<<setw(12)<<totald[j]<<"           "<<setw(12)<<avgd[j]<<"                        ";
+			cout<<"  平均值 "<<setw(12)<<avgpass<<"                "<<setw(12)<<avgpph<<"              "<<setw(12)<<avgtwt<<"           "<<setw(12)<<avgawt<<"           "<<setw(12)<<avgtd<<"           "<<setw(12)<<avgad<<"                        ";
+			cout<<"  最优值 "<<setw(12)<<maxpass<<"                "<<setw(12)<<maxpph<<"              "<<setw(12)<<mintwt<<"           "<<setw(12)<<minawt<<"           "<<setw(12)<<mintd<<"           "<<setw(12)<<minad<<"                        ";
+			cout<<"  最劣值 "<<setw(12)<<minpass<<"                "<<setw(12)<<minpph<<"              "<<setw(12)<<maxtwt<<"           "<<setw(12)<<maxawt<<"           "<<setw(12)<<maxtd<<"           "<<setw(12)<<maxad<<"                        ";
 			for(j=1;j<=SCREEN_WIDTH;j++)
 				cout<<" ";
 			setcolor(NORMAL);
