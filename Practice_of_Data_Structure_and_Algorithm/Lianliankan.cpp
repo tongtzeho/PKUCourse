@@ -15,7 +15,7 @@
 
 // 数据结构与算法实习之连连看（自动消解）
 // 文件名：Lianliankan.cpp
-// 作者：唐子豪
+// 作者：-------
 // 日期：2012年11月18日
 // 编译环境：Microsoft Visual C++ 6.0
 // 操作系统：Microsoft Windows XP
