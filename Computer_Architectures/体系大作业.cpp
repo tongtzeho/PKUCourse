@@ -1,37 +1,36 @@
 /*
 Main.cpp
-×÷Õß£ºÌÆ×ÓºÀ Àî³¤ËÉ ÌÀ×ÓÑó
 
-³ÌĞòÁ÷³Ì£º
-1.´Óinstruction.txtÖĞ¶ÁÈ¡Unicore32Ö¸Áî
-2.µ÷ÓÃasm2bin.hÖĞµÄº¯Êı£¬½«»ã±àÖ¸Áî×ª³É¶ş½øÖÆÖ¸Áî£¬²¢±£´æÔÚÖ¸Áî´æ´¢Æ÷ÖĞ
-3.°´È¡Ö¸->ÒëÂë->Ö´ĞĞ->·Ã´æ->Ğ´»ØµÄË³Ğò£¬ÔÚÁ÷Ë®Ïß½á¹¹ÖĞÔËĞĞÖ¸Áî
- (1)Ã¿¸öÊ±ÖÓÖÜÆÚ£¬·Ö±ğ´´½¨Ò»¸öÈ¡Ö¸Ïß³Ì¡¢Ò»¸öÒëÂëÏß³Ì¡¢Ò»¸öÖ´ĞĞÏß³Ì¡¢Ò»¸ö·Ã´æÏß³ÌºÍÒ»¸ö»ØĞ´Ïß³Ì£¬È»ºóµÈ´ıÕâÎå¸öÏß³Ì¶¼½áÊøºó£¬²Å½øÈëÏÂÒ»¸öÊ±ÖÓÖÜÆÚ 
- (2)È¡Ö¸Ïß³Ì¶ÔÖ¸Áî´æ´¢Æ÷ÖĞPC¼Ä´æÆ÷µÄµØÖ·½øĞĞÈ¡Ö¸
- 	¢Ù°´PC¼Ä´æÆ÷µÄµØÖ·½øĞĞÈ¡Ö¸
-	¢ÚÈç¹ûÈ¡µ½µÄÖ¸ÁîÊÇ0xFFFFFFFF£¬ÔòÏÂÒ»ÖÜÆÚ²»ÔÙÈ¡Ö¸£¬²»ÔÙ½øĞĞÏÂÒ»²½
-	¢ÛÈç¹ûµ±Ç°Ö´ĞĞµÄÖ¸Áî²»ÊÇÌø×ªÖ¸Áî£¬»ò»¹Î´ÅĞ¶¨ÊÇ·ñÌø×ªÖ¸Áî£¬Ôò½øĞĞPC+4²Ù×÷
- (3)ÒëÂëÏß³Ì¶ÔÉÏÒ»Ê±ÖÓÖÜÆÚÈ¡µÄÖ¸Áî£¨Èç¹ûÓĞµÄ»°£©½øĞĞÒëÂë
-	¢ÙÖ¸ÁîµÄ¸ß8Î»Îª²Ù×÷Âë
-	¢Ú¸ù¾İ²Ù×÷ÂëÈ·¶¨stateµÄÖµ£¬¼´¸ÃÖÜÆÚµÄÖ´ĞĞ·½Ê½¡¢ÊÇ·ñ·Ã´æ¡¢ÊÇ·ñÈ¡Ö¸
- (4)Ö´ĞĞÏß³Ì¸ù¾İÉÏÒ»ÖÜÆÚ¶ÔÖ¸ÁîÒëÂëµÄ½á¹û·ÖÇé¿ö£¨RĞÍ¡¢IĞÍ¡¢´æÈ¡¡¢·ÖÖ§¡¢Ìø×ªµÈ£©Ö´ĞĞÖ¸Áî
-	¢ÙÏÈ¶ÁÈ¡¼Ä´æÆ÷µÄÖµ
-    ¢ÚÖ´ĞĞRĞÍÖ¸Áî£ºÈç¹ûĞèÒªÒÆÎ»ÔòÖ´ĞĞÒÆÎ»£¬Èç¹ûÊÇ¼õ·¨Ôò¶Ô²Ù×÷Êı2È¡·´¼Ó1£¬Ö®ºó¸ù¾İ²Ù×÷ÂëÈ·¶¨ALUµÄopÖµ£¬È»ºóÓÃALU½øĞĞ¼ÆËã
-	¢ÛÖ´ĞĞIĞÍÖ¸Áî£ºÏÈ¶ÔÁ¢¼´Êı×öÁãÀ©Õ¹£¬È»ºóÒÆÎ»£¬ÔÙ¸ù¾İ²Ù×÷ÂëÈ·¶¨ALUµÄopÖµºÍsetflagÎ»£¬È»ºóÓÃALU½øĞĞ¼ÆËã
-	¢ÜÖ´ĞĞ´æÈ¡Ö¸Áî£ºÈç¹ûÓĞrs2£¬Ôò½øĞĞÒÆÎ»£»Èç¹ûÊÇimm14£¬Ôò½øĞĞÀ©Õ¹¡£½Ó×ÅÓÃALU¼ÆËãµØÖ·
-	¢İÖ´ĞĞBEQÖ¸Áî£ºÈç¹ûZÎ»Îª1£¬Ôò½«PCµÄÖµ±ä³ÉPC+4+offset£¬²¢½«¸ÃÖ¸Áî±êÎªÌø×ªÖ¸Áî£»Èç¹ûZÎ»Îª0£¬ÎŞ²Ù×÷
-	¢ŞÖ´ĞĞBÖ¸Áî£º½«PCµÄÖµ±ä³ÉPC+4+offset£¬²¢½«¸ÃÖ¸Áî±êÎªÌø×ªÖ¸Áî
-	¢ßÖ´ĞĞJUMPÖ¸Áî£º½«PCµÄÖµ±ä³Érs2¼Ä´æÆ÷µÄÖµ£¬²¢½«¸ÃÖ¸Áî±êÎªÌø×ªÖ¸Áî
- (5)·Ã´æÏß³Ì¶ÔÉÏÒ»ÖÜÆÚµÄ´æÈ¡Ö¸Áî½øĞĞ·Ã´æ¶ÁĞ´²Ù×÷
-    ¢ÙÅĞ¶ÏÊÇ¶Á´æ´¢Æ÷»¹ÊÇĞ´´æ´¢Æ÷
-	¢Ú·ÃÎÊCache£¬Í¨¹ıCache·ÃÎÊ´æ´¢Æ÷
- (6)Ğ´»ØÏß³Ì¶ÔÉÏÉÏÖÜÆÚÖ´ĞĞµÄÖ¸ÁîĞèÒª»ØĞ´£¨Èç¹ûÓĞĞèÒªµÄ»°£©
- (7)Èç¹û¸ÃÊ±ÖÓÖÜÆÚÖ´ĞĞµÄÖ¸Áî·¢ÉúÁËÌø×ª£¬ÔòÏÂÒ»ÖÜÆÚ²»½øĞĞÒëÂëºÍÖ´ĞĞ£¨Ïàµ±ÓÚÍ£Ö¹ÁËË³Ğò½«Ö´ĞĞµÄÖ¸ÁîµÄÖ´ĞĞ£©
- (8)´òÓ¡ĞÅÏ¢
+ç¨‹åºæµç¨‹ï¼š
+1.ä»instruction.txtä¸­è¯»å–Unicore32æŒ‡ä»¤
+2.è°ƒç”¨asm2bin.hä¸­çš„å‡½æ•°ï¼Œå°†æ±‡ç¼–æŒ‡ä»¤è½¬æˆäºŒè¿›åˆ¶æŒ‡ä»¤ï¼Œå¹¶ä¿å­˜åœ¨æŒ‡ä»¤å­˜å‚¨å™¨ä¸­
+3.æŒ‰å–æŒ‡->è¯‘ç ->æ‰§è¡Œ->è®¿å­˜->å†™å›çš„é¡ºåºï¼Œåœ¨æµæ°´çº¿ç»“æ„ä¸­è¿è¡ŒæŒ‡ä»¤
+ (1)æ¯ä¸ªæ—¶é’Ÿå‘¨æœŸï¼Œåˆ†åˆ«åˆ›å»ºä¸€ä¸ªå–æŒ‡çº¿ç¨‹ã€ä¸€ä¸ªè¯‘ç çº¿ç¨‹ã€ä¸€ä¸ªæ‰§è¡Œçº¿ç¨‹ã€ä¸€ä¸ªè®¿å­˜çº¿ç¨‹å’Œä¸€ä¸ªå›å†™çº¿ç¨‹ï¼Œç„¶åç­‰å¾…è¿™äº”ä¸ªçº¿ç¨‹éƒ½ç»“æŸåï¼Œæ‰è¿›å…¥ä¸‹ä¸€ä¸ªæ—¶é’Ÿå‘¨æœŸ 
+ (2)å–æŒ‡çº¿ç¨‹å¯¹æŒ‡ä»¤å­˜å‚¨å™¨ä¸­PCå¯„å­˜å™¨çš„åœ°å€è¿›è¡Œå–æŒ‡
+ 	â‘ æŒ‰PCå¯„å­˜å™¨çš„åœ°å€è¿›è¡Œå–æŒ‡
+	â‘¡å¦‚æœå–åˆ°çš„æŒ‡ä»¤æ˜¯0xFFFFFFFFï¼Œåˆ™ä¸‹ä¸€å‘¨æœŸä¸å†å–æŒ‡ï¼Œä¸å†è¿›è¡Œä¸‹ä¸€æ­¥
+	â‘¢å¦‚æœå½“å‰æ‰§è¡Œçš„æŒ‡ä»¤ä¸æ˜¯è·³è½¬æŒ‡ä»¤ï¼Œæˆ–è¿˜æœªåˆ¤å®šæ˜¯å¦è·³è½¬æŒ‡ä»¤ï¼Œåˆ™è¿›è¡ŒPC+4æ“ä½œ
+ (3)è¯‘ç çº¿ç¨‹å¯¹ä¸Šä¸€æ—¶é’Ÿå‘¨æœŸå–çš„æŒ‡ä»¤ï¼ˆå¦‚æœæœ‰çš„è¯ï¼‰è¿›è¡Œè¯‘ç 
+	â‘ æŒ‡ä»¤çš„é«˜8ä½ä¸ºæ“ä½œç 
+	â‘¡æ ¹æ®æ“ä½œç ç¡®å®šstateçš„å€¼ï¼Œå³è¯¥å‘¨æœŸçš„æ‰§è¡Œæ–¹å¼ã€æ˜¯å¦è®¿å­˜ã€æ˜¯å¦å–æŒ‡
+ (4)æ‰§è¡Œçº¿ç¨‹æ ¹æ®ä¸Šä¸€å‘¨æœŸå¯¹æŒ‡ä»¤è¯‘ç çš„ç»“æœåˆ†æƒ…å†µï¼ˆRå‹ã€Iå‹ã€å­˜å–ã€åˆ†æ”¯ã€è·³è½¬ç­‰ï¼‰æ‰§è¡ŒæŒ‡ä»¤
+	â‘ å…ˆè¯»å–å¯„å­˜å™¨çš„å€¼
+    â‘¡æ‰§è¡ŒRå‹æŒ‡ä»¤ï¼šå¦‚æœéœ€è¦ç§»ä½åˆ™æ‰§è¡Œç§»ä½ï¼Œå¦‚æœæ˜¯å‡æ³•åˆ™å¯¹æ“ä½œæ•°2å–ååŠ 1ï¼Œä¹‹åæ ¹æ®æ“ä½œç ç¡®å®šALUçš„opå€¼ï¼Œç„¶åç”¨ALUè¿›è¡Œè®¡ç®—
+	â‘¢æ‰§è¡ŒIå‹æŒ‡ä»¤ï¼šå…ˆå¯¹ç«‹å³æ•°åšé›¶æ‰©å±•ï¼Œç„¶åç§»ä½ï¼Œå†æ ¹æ®æ“ä½œç ç¡®å®šALUçš„opå€¼å’Œsetflagä½ï¼Œç„¶åç”¨ALUè¿›è¡Œè®¡ç®—
+	â‘£æ‰§è¡Œå­˜å–æŒ‡ä»¤ï¼šå¦‚æœæœ‰rs2ï¼Œåˆ™è¿›è¡Œç§»ä½ï¼›å¦‚æœæ˜¯imm14ï¼Œåˆ™è¿›è¡Œæ‰©å±•ã€‚æ¥ç€ç”¨ALUè®¡ç®—åœ°å€
+	â‘¤æ‰§è¡ŒBEQæŒ‡ä»¤ï¼šå¦‚æœZä½ä¸º1ï¼Œåˆ™å°†PCçš„å€¼å˜æˆPC+4+offsetï¼Œå¹¶å°†è¯¥æŒ‡ä»¤æ ‡ä¸ºè·³è½¬æŒ‡ä»¤ï¼›å¦‚æœZä½ä¸º0ï¼Œæ— æ“ä½œ
+	â‘¥æ‰§è¡ŒBæŒ‡ä»¤ï¼šå°†PCçš„å€¼å˜æˆPC+4+offsetï¼Œå¹¶å°†è¯¥æŒ‡ä»¤æ ‡ä¸ºè·³è½¬æŒ‡ä»¤
+	â‘¦æ‰§è¡ŒJUMPæŒ‡ä»¤ï¼šå°†PCçš„å€¼å˜æˆrs2å¯„å­˜å™¨çš„å€¼ï¼Œå¹¶å°†è¯¥æŒ‡ä»¤æ ‡ä¸ºè·³è½¬æŒ‡ä»¤
+ (5)è®¿å­˜çº¿ç¨‹å¯¹ä¸Šä¸€å‘¨æœŸçš„å­˜å–æŒ‡ä»¤è¿›è¡Œè®¿å­˜è¯»å†™æ“ä½œ
+    â‘ åˆ¤æ–­æ˜¯è¯»å­˜å‚¨å™¨è¿˜æ˜¯å†™å­˜å‚¨å™¨
+	â‘¡è®¿é—®Cacheï¼Œé€šè¿‡Cacheè®¿é—®å­˜å‚¨å™¨
+ (6)å†™å›çº¿ç¨‹å¯¹ä¸Šä¸Šå‘¨æœŸæ‰§è¡Œçš„æŒ‡ä»¤éœ€è¦å›å†™ï¼ˆå¦‚æœæœ‰éœ€è¦çš„è¯ï¼‰
+ (7)å¦‚æœè¯¥æ—¶é’Ÿå‘¨æœŸæ‰§è¡Œçš„æŒ‡ä»¤å‘ç”Ÿäº†è·³è½¬ï¼Œåˆ™ä¸‹ä¸€å‘¨æœŸä¸è¿›è¡Œè¯‘ç å’Œæ‰§è¡Œï¼ˆç›¸å½“äºåœæ­¢äº†é¡ºåºå°†æ‰§è¡Œçš„æŒ‡ä»¤çš„æ‰§è¡Œï¼‰
+ (8)æ‰“å°ä¿¡æ¯
 */
  
-#include "types.h" // ¶¨ÒåÁË¼Ä´æÆ÷¶Ñ¡¢´æ´¢Æ÷¡¢Cache¡¢ALU¡¢À©Õ¹Æ÷¡¢ÒÆÎ»Æ÷µÈÀà
-#include "asm2bin.h" // »ã±à×ª¶ş½øÖÆµÄº¯Êı
+#include "types.h" // å®šä¹‰äº†å¯„å­˜å™¨å †ã€å­˜å‚¨å™¨ã€Cacheã€ALUã€æ‰©å±•å™¨ã€ç§»ä½å™¨ç­‰ç±»
+#include "asm2bin.h" // æ±‡ç¼–è½¬äºŒè¿›åˆ¶çš„å‡½æ•°
 
 #include <iostream>
 #include <fstream>
@@ -48,21 +47,21 @@ Main.cpp
 
 using namespace std;
 
-vector<string> vasm; // ±£´æÊäÈëµÄ»ã±àÖ¸Áî
-vector<unsigned> vins; // ±£´æ»ã±àÖ¸Áî¶ÔÓ¦µÄ¶ş½øÖÆÖ¸Áî
-vector<LABEL> vlabel,vbi; // ±£´æÌø×ª±êºÅµÄµØÖ·
-int clock=0; // Ê±ÖÓÖÜÆÚ
+vector<string> vasm; // ä¿å­˜è¾“å…¥çš„æ±‡ç¼–æŒ‡ä»¤
+vector<unsigned> vins; // ä¿å­˜æ±‡ç¼–æŒ‡ä»¤å¯¹åº”çš„äºŒè¿›åˆ¶æŒ‡ä»¤
+vector<LABEL> vlabel,vbi; // ä¿å­˜è·³è½¬æ ‡å·çš„åœ°å€
+int clock=0; // æ—¶é’Ÿå‘¨æœŸ
 
-REGISTER_FILE regf; // ¼Ä´æÆ÷¶Ñ
-PC pc; // PC¼Ä´æÆ÷
+REGISTER_FILE regf; // å¯„å­˜å™¨å †
+PC pc; // PCå¯„å­˜å™¨
 ALU alu; // ALU
-ADDER adder; // ¼Ó·¨Æ÷
-MEMORY insmemory(IMEM_SIZE),datamemory(DMEM_SIZE); // Ö¸Áî´æ´¢Æ÷ºÍÊı¾İ´æ´¢Æ÷
-EXTENDER extender; // À©Õ¹Æ÷
-SHIFTER shifter; // ÒÆÎ»Æ÷
-CACHE cache(&datamemory); // Êı¾İ´æ´¢Æ÷µÄCache
+ADDER adder; // åŠ æ³•å™¨
+MEMORY insmemory(IMEM_SIZE),datamemory(DMEM_SIZE); // æŒ‡ä»¤å­˜å‚¨å™¨å’Œæ•°æ®å­˜å‚¨å™¨
+EXTENDER extender; // æ‰©å±•å™¨
+SHIFTER shifter; // ç§»ä½å™¨
+CACHE cache(&datamemory); // æ•°æ®å­˜å‚¨å™¨çš„Cache
 
-HANDLE mutex_pc=CreateSemaphore(NULL,1,1,NULL); // ¶àÏß³Ì±à³ÌÖĞPC¼Ä´æÆ÷µÄĞÅºÅÁ¿
+HANDLE mutex_pc=CreateSemaphore(NULL,1,1,NULL); // å¤šçº¿ç¨‹ç¼–ç¨‹ä¸­PCå¯„å­˜å™¨çš„ä¿¡å·é‡
 HANDLE mutex_cpi=CreateSemaphore(NULL,1,1,NULL);
 
 void InputInstructions();
@@ -70,16 +69,16 @@ void ParseInstruction(string instruction);
 void ParseBInstruction();
 void LoadInstructions();
 
-int state[5][5]={{0,-1,-1,-1,-1},{0,0,-1,-1,-1},{0,0,0,-1,-1},{0,0,0,0,-1},{0,0,0,0,0}}; // ÏÂÒ»ÖÜÆÚ¸÷Ïß³ÌµÄ×´Ì¬£¨ÊÇ·ñĞèÒª×öÄ³Ò»²Ù×÷/ĞèÒªÈçºÎ²Ù×÷£©
-unsigned instructions[5]={0}; // Ä³Ò»ÖÜÆÚÈ¡µÄÖ¸Áî
-unsigned pctemp[5]={0}; // Ä³Ò»ÖÜÆÚÈ¡Ö¸Ê±µÄPC¼Ä´æÆ÷Öµ
-unsigned cachetemp[5][2]={0}; // Ä³Ò»ÖÜÆÚ·Ã´æµÄµØÖ·ºÍÊı¾İ
-unsigned regwritetemp[5][3]={0}; // Ä³Ò»ÖÜÆÚÖ´ĞĞ»ò·Ã´æºóĞŞ¸ÄµÄ¼Ä´æÆ÷µÄ½á¹û
-bool isjumpins=false; // Ö´ĞĞµÄÖ¸ÁîÊÇ·ñÌø×ª
-bool wbtemp[5]={0}; // Ğ´»ØµÄ½á¹û
+int state[5][5]={{0,-1,-1,-1,-1},{0,0,-1,-1,-1},{0,0,0,-1,-1},{0,0,0,0,-1},{0,0,0,0,0}}; // ä¸‹ä¸€å‘¨æœŸå„çº¿ç¨‹çš„çŠ¶æ€ï¼ˆæ˜¯å¦éœ€è¦åšæŸä¸€æ“ä½œ/éœ€è¦å¦‚ä½•æ“ä½œï¼‰
+unsigned instructions[5]={0}; // æŸä¸€å‘¨æœŸå–çš„æŒ‡ä»¤
+unsigned pctemp[5]={0}; // æŸä¸€å‘¨æœŸå–æŒ‡æ—¶çš„PCå¯„å­˜å™¨å€¼
+unsigned cachetemp[5][2]={0}; // æŸä¸€å‘¨æœŸè®¿å­˜çš„åœ°å€å’Œæ•°æ®
+unsigned regwritetemp[5][3]={0}; // æŸä¸€å‘¨æœŸæ‰§è¡Œæˆ–è®¿å­˜åä¿®æ”¹çš„å¯„å­˜å™¨çš„ç»“æœ
+bool isjumpins=false; // æ‰§è¡Œçš„æŒ‡ä»¤æ˜¯å¦è·³è½¬
+bool wbtemp[5]={0}; // å†™å›çš„ç»“æœ
 
-unsigned cpiwithcache=0; // Ê¹ÓÃCacheµÄCPI
-unsigned cpiwithoutcache=0; // ²»Ê¹ÓÃCacheµÄCPI
+unsigned cpiwithcache=0; // ä½¿ç”¨Cacheçš„CPI
+unsigned cpiwithoutcache=0; // ä¸ä½¿ç”¨Cacheçš„CPI
 unsigned execins=0;
 
 DWORD WINAPI FetchInstructions(LPVOID lpParam);
@@ -95,7 +94,7 @@ void ExecBeq(unsigned instruction);
 void ExecB(unsigned instruction);
 void ExecJump(unsigned instruction);
 
-// ´Óinstruction.txtÊäÈë»ã±àÖ¸Áî
+// ä»instruction.txtè¾“å…¥æ±‡ç¼–æŒ‡ä»¤
 void InputInstructions()
 {
 	ifstream fin;
@@ -113,7 +112,7 @@ inline bool isSplit(char c)
 	return c==' '||c==','||c=='<'||c=='>'||c=='+'||c=='['||c==']'||c=='#';
 }
 
-// ¸ù¾İÊäÈëµÄÖ¸ÁîµÄ²Ù×÷µ÷ÓÃasm2bin.hµÄº¯Êı×ª»¯³É¶ş½øÖÆ
+// æ ¹æ®è¾“å…¥çš„æŒ‡ä»¤çš„æ“ä½œè°ƒç”¨asm2bin.hçš„å‡½æ•°è½¬åŒ–æˆäºŒè¿›åˆ¶
 void ParseInstruction(string instruction)
 {
 	int length=instruction.length();
@@ -231,7 +230,7 @@ void ParseInstruction(string instruction)
 	}
 }
 
-// ¼ÆËã·ÖÖ§ºÍÌø×ªÖ¸ÁîµÄµØÖ·
+// è®¡ç®—åˆ†æ”¯å’Œè·³è½¬æŒ‡ä»¤çš„åœ°å€
 void ParseBInstructions()
 {
 	int i,j;
@@ -250,11 +249,11 @@ void ParseBInstructions()
 	}
 }
 
-// ½«¶ş½øÖÆÖ¸Áî¶ÁÈëÖ¸Áî´æ´¢Æ÷
+// å°†äºŒè¿›åˆ¶æŒ‡ä»¤è¯»å…¥æŒ‡ä»¤å­˜å‚¨å™¨
 void LoadInstructions()
 {
 	int i;
-	cout<<"Ö¸Áî:"<<endl;
+	cout<<"æŒ‡ä»¤:"<<endl;
 	for(i=0;i<vins.size();i++)
 	{
 		insmemory.addr=i*4;
@@ -265,11 +264,11 @@ void LoadInstructions()
 		cout<<vasm[i]<<endl;
 	}
 	insmemory.addr=i*4;
-	insmemory.data=0xFFFFFFFF; // ×îºóÒ»ÌõÖ¸ÁîÖ®ºóµÄ4¸ö×Ö½ÚÓÃ0xFFFFFFFF±íÊ¾£¬×÷ÎªÖ¸ÁîµÄ½áÊø
+	insmemory.data=0xFFFFFFFF; // æœ€åä¸€æ¡æŒ‡ä»¤ä¹‹åçš„4ä¸ªå­—èŠ‚ç”¨0xFFFFFFFFè¡¨ç¤ºï¼Œä½œä¸ºæŒ‡ä»¤çš„ç»“æŸ
 	insmemory.Write(4);
 }
 
-// È¡Ö¸Ïß³Ì
+// å–æŒ‡çº¿ç¨‹
 DWORD WINAPI FetchInstructions(LPVOID lpParam)
 { 
 	if(state[clock%5][0]==-1)
@@ -278,7 +277,7 @@ DWORD WINAPI FetchInstructions(LPVOID lpParam)
 		return 0;
 	}
 	WaitForSingleObject(mutex_output,INFINITE);
-	cout<<"È¡Ö¸ - "<<vasm[pc.pc/4]<<endl;
+	cout<<"å–æŒ‡ - "<<vasm[pc.pc/4]<<endl;
 	ReleaseSemaphore(mutex_output,1,NULL);
 	insmemory.addr=pc.pc;
 	insmemory.Read(4);
@@ -294,7 +293,7 @@ DWORD WINAPI FetchInstructions(LPVOID lpParam)
 	}
 	pctemp[(clock+2)%5]=pc.pc;
 	
-	//Èç¹û¸ÃÖÜÆÚµÄÖ´ĞĞ¹ı³ÌÅĞ¶ÏÁËÖ´ĞĞµÄÖ¸ÁîÊÇÌø×ªÖ¸Áî£¬ÇÒÒÑ¾­ĞŞ¸ÄÁËPC¼Ä´æÆ÷µÄÖµ£¬¾Í²»½øĞĞPC+4²Ù×÷£¬·ñÔò¼ÓËøºó½øĞĞPC+4
+	//å¦‚æœè¯¥å‘¨æœŸçš„æ‰§è¡Œè¿‡ç¨‹åˆ¤æ–­äº†æ‰§è¡Œçš„æŒ‡ä»¤æ˜¯è·³è½¬æŒ‡ä»¤ï¼Œä¸”å·²ç»ä¿®æ”¹äº†PCå¯„å­˜å™¨çš„å€¼ï¼Œå°±ä¸è¿›è¡ŒPC+4æ“ä½œï¼Œå¦åˆ™åŠ é”åè¿›è¡ŒPC+4
 	WaitForSingleObject(mutex_pc,INFINITE);
 	if(isjumpins)
 	{
@@ -314,7 +313,7 @@ DWORD WINAPI FetchInstructions(LPVOID lpParam)
 	return 0;
 }
 
-// ÒëÂëÏß³Ì
+// è¯‘ç çº¿ç¨‹
 DWORD WINAPI Decode(LPVOID lpParam)
 {
 	if(state[clock%5][1]==-1)
@@ -323,30 +322,30 @@ DWORD WINAPI Decode(LPVOID lpParam)
 		return 0;
 	}
 	WaitForSingleObject(mutex_output,INFINITE);
-	cout<<"ÒëÂë - "<<vasm[pctemp[(clock+1)%5]/4]<<endl;
+	cout<<"è¯‘ç  - "<<vasm[pctemp[(clock+1)%5]/4]<<endl;
 	ReleaseSemaphore(mutex_output,1,NULL);
 	unsigned instruction=instructions[(clock+4)%5];
 	unsigned opcode=(instruction>>24)&0xFF;
-	if(opcode==0xA0) // ·ÖÖ§£¨BEQ£©Ö¸Áî
+	if(opcode==0xA0) // åˆ†æ”¯ï¼ˆBEQï¼‰æŒ‡ä»¤
 	{
 		state[(clock+1)%5][2]=3;
 		state[(clock+2)%5][3]=state[(clock+3)%5][4]=-1;
 	}
-	else if(opcode==0xBC) // BÌø×ªÖ¸Áî
+	else if(opcode==0xBC) // Bè·³è½¬æŒ‡ä»¤
 	{
 		state[(clock+1)%5][2]=4;
 		state[(clock+2)%5][3]=state[(clock+3)%5][4]=-1;
 	}
-	else if(opcode==0x10) // JUMPÌø×ªÖ¸Áî
+	else if(opcode==0x10) // JUMPè·³è½¬æŒ‡ä»¤
 	{
 		state[(clock+1)%5][2]=5;
 		state[(clock+2)%5][3]=state[(clock+3)%5][4]=-1;		
 	}
-	else if((opcode&0x60)==0) // RĞÍÖ¸Áî
+	else if((opcode&0x60)==0) // Rå‹æŒ‡ä»¤
 	{
 		state[(clock+1)%5][2]=0;
 		
-		// CMPSUB.AÖ¸ÁîÎŞĞèĞ´»Ø£¬ÆäËûÒªĞ´»Ø£¬ÏÂÍ¬
+		// CMPSUB.AæŒ‡ä»¤æ— éœ€å†™å›ï¼Œå…¶ä»–è¦å†™å›ï¼Œä¸‹åŒ
 		if(opcode!=0x15)
 		{
 			state[(clock+2)%5][3]=-1;
@@ -357,7 +356,7 @@ DWORD WINAPI Decode(LPVOID lpParam)
 			state[(clock+2)%5][3]=state[(clock+3)%5][4]=-1;
 		}
 	}
-	else if((opcode&0x60)==0x20) // IĞÍÖ¸Áî
+	else if((opcode&0x60)==0x20) // Iå‹æŒ‡ä»¤
 	{
 		state[(clock+1)%5][2]=1;
 		if(opcode!=0x35)
@@ -370,7 +369,7 @@ DWORD WINAPI Decode(LPVOID lpParam)
 			state[(clock+2)%5][3]=state[(clock+3)%5][4]=-1;
 		}
 	}
-	else if((opcode&0x40)==0x40) // ´æÈ¡£¨ST/LD£©Ö¸Áî
+	else if((opcode&0x40)==0x40) // å­˜å–ï¼ˆST/LDï¼‰æŒ‡ä»¤
 	{
 		state[(clock+1)%5][2]=2;
 		state[(clock+2)%5][3]=state[(clock+3)%5][4]=0;
@@ -378,7 +377,7 @@ DWORD WINAPI Decode(LPVOID lpParam)
 	return 0;
 }
 
-// Ö´ĞĞÏß³Ì
+// æ‰§è¡Œçº¿ç¨‹
 DWORD WINAPI Execute(LPVOID lpParam)
 {
 	if(state[clock%5][2]==-1)
@@ -387,7 +386,7 @@ DWORD WINAPI Execute(LPVOID lpParam)
 		return 0;
 	}
 	WaitForSingleObject(mutex_output,INFINITE);
-	cout<<"Ö´ĞĞ - "<<vasm[pctemp[clock%5]/4]<<endl;
+	cout<<"æ‰§è¡Œ - "<<vasm[pctemp[clock%5]/4]<<endl;
 	ReleaseSemaphore(mutex_output,1,NULL);
 	WaitForSingleObject(mutex_cpi,INFINITE);
 	cpiwithcache++;
@@ -400,7 +399,7 @@ DWORD WINAPI Execute(LPVOID lpParam)
 	regf.readreg2=instruction&0x1F;
 	regf.writereg=(instruction>>14)&0x1F;
 	
-	// ¶Ô´æÈ¡Ö¸Áî£¬¼ÆËãÊı¾İ´æ´¢Æ÷µÄµØÖ·
+	// å¯¹å­˜å–æŒ‡ä»¤ï¼Œè®¡ç®—æ•°æ®å­˜å‚¨å™¨çš„åœ°å€
 	if(state[clock%5][2]==3||state[clock%5][2]==4)
 	{
 		alu.srcA=1;
@@ -420,16 +419,16 @@ DWORD WINAPI Execute(LPVOID lpParam)
 	}
 	
 	/*
-	  ÏÈ¶ÁÈ¡¼Ä´æÆ÷¶Ñ
-	  ºó½øĞĞÊı¾İÃ°ÏÕÇ°µİ´¦Àí£º
-	    Èç¹û¸ÃÖÜÆÚĞèÒªµÄ¼Ä´æÆ÷µÄÖµ£¬ÊÇÉÏÒ»ÖÜÆÚ»òÉÏÉÏÖÜÆÚĞ´¼Ä´æÆ÷µÄÖµ£¬
-		Ôò¿ÉÄÜ»¹Î´Ğ´»Ø¼Ä´æÆ÷¶Ñ£¬ÕâÊ±ĞèÒª´ÓregwritetempÁÙÊ±±äÁ¿ÖĞ¶ÁÈ¡Êı¾İ
-		¶øÈç¹ûÕâÖÖÇé¿öÏÂ£¬ÉÏÒ»Ö¸ÁîÊÇLDÖ¸Áî£¬ÔòÔÚÍ¬Ò»ÖÜÆÚµÄ·Ã´æ²Ù×÷½áÊøºó£¬
-		²ÅÄÜ»ñÈ¡ÊıÖµ£¬ÕâÊ±ĞèÒªµÈ´ı·Ã´æ²Ù×÷½áÊø
-	  ÁíÍâ£¬regwritetempÇÉÃîµØ½â¾öÁË½á¹¹Ã°ÏÕµÄÎÊÌâ£º
-	    µ±Í¬Ò»ÖÜÆÚµÄĞ´»ØÏß³ÌÔÚĞ´Ä³Ò»¼Ä´æÆ÷µÄÖµÊ±£¬Í¬Ê±Ö´ĞĞÏß³ÌÒ²ĞèÒª¶Á
-		¸Ã¼Ä´æÆ÷µÄÖµ£¬ÄÇÃ´Ö´ĞĞÏß³Ì×îÖÕ¶ÁÈ¡µÄÊı¾İÀ´×ÔÓÚregwritetemp£¬¶ø²»ÊÇ
-		regf¡£ÕâÊÇÒòÎªÔÚÉÏÉÏÖÜÆÚ£¬¸Ã¼Ä´æÆ÷µÄÖµ±»ĞŞ¸Ä£¬Òò´Ë»á±»±£´æÔÚregwritetempÖĞ 
+	  å…ˆè¯»å–å¯„å­˜å™¨å †
+	  åè¿›è¡Œæ•°æ®å†’é™©å‰é€’å¤„ç†ï¼š
+	    å¦‚æœè¯¥å‘¨æœŸéœ€è¦çš„å¯„å­˜å™¨çš„å€¼ï¼Œæ˜¯ä¸Šä¸€å‘¨æœŸæˆ–ä¸Šä¸Šå‘¨æœŸå†™å¯„å­˜å™¨çš„å€¼ï¼Œ
+		åˆ™å¯èƒ½è¿˜æœªå†™å›å¯„å­˜å™¨å †ï¼Œè¿™æ—¶éœ€è¦ä»regwritetempä¸´æ—¶å˜é‡ä¸­è¯»å–æ•°æ®
+		è€Œå¦‚æœè¿™ç§æƒ…å†µä¸‹ï¼Œä¸Šä¸€æŒ‡ä»¤æ˜¯LDæŒ‡ä»¤ï¼Œåˆ™åœ¨åŒä¸€å‘¨æœŸçš„è®¿å­˜æ“ä½œç»“æŸåï¼Œ
+		æ‰èƒ½è·å–æ•°å€¼ï¼Œè¿™æ—¶éœ€è¦ç­‰å¾…è®¿å­˜æ“ä½œç»“æŸ
+	  å¦å¤–ï¼Œregwritetempå·§å¦™åœ°è§£å†³äº†ç»“æ„å†’é™©çš„é—®é¢˜ï¼š
+	    å½“åŒä¸€å‘¨æœŸçš„å†™å›çº¿ç¨‹åœ¨å†™æŸä¸€å¯„å­˜å™¨çš„å€¼æ—¶ï¼ŒåŒæ—¶æ‰§è¡Œçº¿ç¨‹ä¹Ÿéœ€è¦è¯»
+		è¯¥å¯„å­˜å™¨çš„å€¼ï¼Œé‚£ä¹ˆæ‰§è¡Œçº¿ç¨‹æœ€ç»ˆè¯»å–çš„æ•°æ®æ¥è‡ªäºregwritetempï¼Œè€Œä¸æ˜¯
+		regfã€‚è¿™æ˜¯å› ä¸ºåœ¨ä¸Šä¸Šå‘¨æœŸï¼Œè¯¥å¯„å­˜å™¨çš„å€¼è¢«ä¿®æ”¹ï¼Œå› æ­¤ä¼šè¢«ä¿å­˜åœ¨regwritetempä¸­ 
 	*/
 	regf.run();
 	if(regwritetemp[(clock+3)%5][0]!=0&&regwritetemp[(clock+3)%5][1]==regf.readreg1)
@@ -501,7 +500,7 @@ DWORD WINAPI Execute(LPVOID lpParam)
 	return 0;
 }
 
-// Ö´ĞÅRĞÍÖ¸Áî
+// æ‰§ä¿¡Rå‹æŒ‡ä»¤
 void ExecRIns(unsigned instruction)
 {
 	unsigned opcode=(instruction>>24)&0xFF;
@@ -563,7 +562,7 @@ void ExecRIns(unsigned instruction)
 	regwritetemp[clock%5][2]=alu.out;
 }
 
-// Ö´ĞĞIĞÍÖ¸Áî
+// æ‰§è¡ŒIå‹æŒ‡ä»¤
 void ExecIIns(unsigned instruction)
 {
 	unsigned opcode=(instruction>>24)&0xFF;
@@ -611,7 +610,7 @@ void ExecIIns(unsigned instruction)
 	regwritetemp[clock%5][2]=alu.out;
 }
 
-// Ö´ĞĞ´æÈ¡Ö¸Áî
+// æ‰§è¡Œå­˜å–æŒ‡ä»¤
 void ExecSL(unsigned instruction)
 {
 	unsigned opcode=(instruction>>24)&0xFF;
@@ -651,7 +650,7 @@ void ExecSL(unsigned instruction)
 	}
 }
 
-// Ö´ĞĞBEQÖ¸Áî
+// æ‰§è¡ŒBEQæŒ‡ä»¤
 void ExecBeq(unsigned instruction)
 {
 	if(regf.flag.Z)
@@ -666,7 +665,7 @@ void ExecBeq(unsigned instruction)
 	regwritetemp[clock%5][0]=0;
 }
 
-// Ö´ĞĞBÖ¸Áî
+// æ‰§è¡ŒBæŒ‡ä»¤
 void ExecB(unsigned instruction)
 {
 	WaitForSingleObject(mutex_pc,INFINITE);
@@ -678,7 +677,7 @@ void ExecB(unsigned instruction)
 	regwritetemp[clock%5][0]=0;
 }
 
-// Ö´ĞĞJUMPÖ¸Áî
+// æ‰§è¡ŒJUMPæŒ‡ä»¤
 void ExecJump(unsigned instruction)
 {
 	WaitForSingleObject(mutex_pc,INFINITE);	
@@ -690,7 +689,7 @@ void ExecJump(unsigned instruction)
 	regwritetemp[clock%5][0]=0;
 }
 
-// ·Ã´æÏß³Ì
+// è®¿å­˜çº¿ç¨‹
 DWORD WINAPI VisitCache(LPVOID lpParam)
 {
 	if(state[clock%5][3]==-1)
@@ -698,7 +697,7 @@ DWORD WINAPI VisitCache(LPVOID lpParam)
 		return 0;
 	}
 	WaitForSingleObject(mutex_output,INFINITE);
-	cout<<"·Ã´æ - "<<vasm[pctemp[(clock+4)%5]/4]<<endl;
+	cout<<"è®¿å­˜ - "<<vasm[pctemp[(clock+4)%5]/4]<<endl;
 	ReleaseSemaphore(mutex_output,1,NULL);
 	WaitForSingleObject(mutex_cpi,INFINITE);
 	cpiwithoutcache+=99;
@@ -709,14 +708,14 @@ DWORD WINAPI VisitCache(LPVOID lpParam)
 	{
 		cache.read=1;
 		cache.write=0;
-	} // opcode×îµÍÎ»Îª1Ôò¶Á´æ´¢Æ÷£¬·ñÔòĞ´´æ´¢Æ÷
+	} // opcodeæœ€ä½ä½ä¸º1åˆ™è¯»å­˜å‚¨å™¨ï¼Œå¦åˆ™å†™å­˜å‚¨å™¨
 	else
 	{
 		cache.read=0;
 		cache.write=1;
 	}
 	WaitForSingleObject(mutex_cpi,INFINITE);
-	unsigned ret=cache.rw(1+3*(((instruction>>26)&1)==0),clock,cachetemp[(clock+4)%5][0],cachetemp[(clock+4)%5][1],cpiwithcache); // ¶Á»òĞ´Cache
+	unsigned ret=cache.rw(1+3*(((instruction>>26)&1)==0),clock,cachetemp[(clock+4)%5][0],cachetemp[(clock+4)%5][1],cpiwithcache); // è¯»æˆ–å†™Cache
 	ReleaseSemaphore(mutex_cpi,1,NULL);
 	if(opcode&1)
 	{
@@ -726,7 +725,7 @@ DWORD WINAPI VisitCache(LPVOID lpParam)
 	return 0;
 }
 
-// Ğ´»ØÏß³Ì
+// å†™å›çº¿ç¨‹
 DWORD WINAPI WriteBack(LPVOID lpParam)
 {	
 	if(state[clock%5][4]==-1||!wbtemp[(clock+3)%5])
@@ -734,7 +733,7 @@ DWORD WINAPI WriteBack(LPVOID lpParam)
 		return 0;
 	}
 	WaitForSingleObject(mutex_output,INFINITE);
-	cout<<"Ğ´»Ø - "<<vasm[pctemp[(clock+3)%5]/4]<<endl;
+	cout<<"å†™å› - "<<vasm[pctemp[(clock+3)%5]/4]<<endl;
 	ReleaseSemaphore(mutex_output,1,NULL);
 	regf.regs[regwritetemp[(clock+3)%5][1]]=regwritetemp[(clock+3)%5][2];
 	return 0;
@@ -760,15 +759,15 @@ int main()
 	                		                		                		                		----------------		|Fetchins      |		|Decode        |		|Execute       |		|VisitMemory   |		|WriteBack     |
 	                		                		                		                								----------------		----------------		----------------		----------------		----------------
 	
-	whileÑ­»·µÄÃ¿´Îµü´ú¹ı³ÌÖ´ĞĞµÄÏàµ±ÓÚÊÇÍ¬Ò»¸ö¿òÖĞµÄ¼¸¸öÏß³Ì£¬whileÑ­»·ÕûÌå¾ÍÊÇ´Ó×óµ½ÓÒÒÀ´ÎÖ´ĞĞ¸÷¸ö¿ò
+	whileå¾ªç¯çš„æ¯æ¬¡è¿­ä»£è¿‡ç¨‹æ‰§è¡Œçš„ç›¸å½“äºæ˜¯åŒä¸€ä¸ªæ¡†ä¸­çš„å‡ ä¸ªçº¿ç¨‹ï¼Œwhileå¾ªç¯æ•´ä½“å°±æ˜¯ä»å·¦åˆ°å³ä¾æ¬¡æ‰§è¡Œå„ä¸ªæ¡†
 	*/ 
 	while(state[clock%5][0]!=-1||state[clock%5][1]!=-1||state[clock%5][2]!=-1||state[clock%5][3]!=-1||state[clock%5][4]!=-1)
 	{
 		cout<<"\n\n=========================================================================\n";
-		cout<<"Ê±ÖÓÖÜÆÚ : "<<clock<<endl;
+		cout<<"æ—¶é’Ÿå‘¨æœŸ : "<<clock<<endl;
 		isjumpins=false;
 		
-		// ´´½¨Îå¸öÏß³Ì£¬ÔÙµÈ´ıÎå¸öÏß³Ì¶¼½áÊøºó²Å½øÈëÏÂÒ»ÖÜÆÚ
+		// åˆ›å»ºäº”ä¸ªçº¿ç¨‹ï¼Œå†ç­‰å¾…äº”ä¸ªçº¿ç¨‹éƒ½ç»“æŸåæ‰è¿›å…¥ä¸‹ä¸€å‘¨æœŸ
 		HANDLE handle_getins=CreateThread(NULL,0,FetchInstructions,NULL,0,NULL);
 		HANDLE handle_decode=CreateThread(NULL,0,Decode,NULL,0,NULL);
 		HANDLE handle_exec=CreateThread(NULL,0,Execute,NULL,0,NULL);
@@ -782,8 +781,8 @@ int main()
 		
 		if(isjumpins)
 		{
-			state[(clock+1)%5][1]=state[(clock+1)%5][2]=-1; // ¶ÔÓÚÌø×ªÖ¸Áî£¬ÏÂÒ»ÖÜÆÚÍ£Ö¹ÒëÂëºÍÖ´ĞĞ 
-			cout<<"µ±Ç°ÖÜÆÚÖ´ĞĞµÄÊÇÌø×ªÖ¸Áî£¡\n";
+			state[(clock+1)%5][1]=state[(clock+1)%5][2]=-1; // å¯¹äºè·³è½¬æŒ‡ä»¤ï¼Œä¸‹ä¸€å‘¨æœŸåœæ­¢è¯‘ç å’Œæ‰§è¡Œ 
+			cout<<"å½“å‰å‘¨æœŸæ‰§è¡Œçš„æ˜¯è·³è½¬æŒ‡ä»¤ï¼\n";
 		}
 		cout<<"-------------------------------------------------------------------------\n";
 		regf.Print();
@@ -792,7 +791,7 @@ int main()
 		clock++;			
 	}
 	cache.Buf2Mem();
-	cout<<"================×î=========ÖÕ=========½á===========¹û====================\n";
+	cout<<"================æœ€=========ç»ˆ=========ç»“===========æœ====================\n";
 	regf.Print();
 	cache.Print();
 	datamemory.Print();
@@ -802,7 +801,7 @@ int main()
 }
 
 /*
-²âÊÔÊı¾İ: 
+æµ‹è¯•æ•°æ®: 
 MOV r0,21
 MOV r2,2
 LOOP: STW r0,[r2]
