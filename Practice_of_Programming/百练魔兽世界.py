@@ -1,10 +1,10 @@
-# python3
+# Python3
 # 题目来源：http://bailian.openjudge.cn/practice/3750/
 # 测试数据参考：http://paste.ubuntu.com/12060696/
 
 import re
 
-class Warrior(object):
+class Warcraft(object):
 	def __init__(self, belong, position, id, element, force, warcrafttype):
 		self.__belong = belong
 		self.__position = position
@@ -51,40 +51,40 @@ class Warrior(object):
 	def lose(self, winner, attack):
 		pass
 		
-class Dragon(Warrior):
+class Dragon(Warcraft):
 	def __init__(self, belong, position, id, element, force):
-		Warrior.__init__(self, belong, position, id, element, force, "dragon")
+		Warcraft.__init__(self, belong, position, id, element, force, "dragon")
 		
-class Ninja(Warrior):
+class Ninja(Warcraft):
 	def __init__(self, belong, position, id, element, force):
-		Warrior.__init__(self, belong, position, id, element, force, "ninja")
+		Warcraft.__init__(self, belong, position, id, element, force, "ninja")
 	def fightagainst(self, attacker):
 		pass
 
-class Iceman(Warrior):
+class Iceman(Warcraft):
 	def __init__(self, belong, position, id, element, force):
-		Warrior.__init__(self, belong, position, id, element, force, "iceman")
+		Warcraft.__init__(self, belong, position, id, element, force, "iceman")
 		self.__stepcount = 0
 	def moveto(self, newposition):
-		Warrior.moveto(self, newposition)
+		Warcraft.moveto(self, newposition)
 		self.__stepcount += 1
 		if self.__stepcount % 2 == 0:
 			self.addelement(-9)
 			if self.getelement() <= 0: self.setelement(1)
 			self.setforce(self.getforce()+20)
 
-class Lion(Warrior):
+class Lion(Warcraft):
 	def __init__(self, belong, position, id, element, force):
-		Warrior.__init__(self, belong, position, id, element, force, "lion")
+		Warcraft.__init__(self, belong, position, id, element, force, "lion")
 		self.__elementold = element
 	def prepare(self):
 		self.__elementold = self.getelement()
 	def lose(self, winner, attack):
 		winner.addelement(self.__elementold)
 
-class Wolf(Warrior):
+class Wolf(Warcraft):
 	def __init__(self, belong, position, id, element, force):
-		Warrior.__init__(self, belong, position, id, element, force, "wolf")
+		Warcraft.__init__(self, belong, position, id, element, force, "wolf")
 		self.__attackwin = 0
 	def win(self, loser, attack):
 		if attack:
