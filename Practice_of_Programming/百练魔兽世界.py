@@ -2,8 +2,6 @@
 # 题目来源：http://bailian.openjudge.cn/practice/3750/
 # 测试数据参考：http://paste.ubuntu.com/12060696/
 
-import re
-
 class Warcraft(object):
 	def __init__(self, belong, position, id, element, force, warcrafttype):
 		self.__belong = belong
@@ -180,13 +178,13 @@ class Timer(object):
 		
 class World(object):
 	def __init__(self, worldparastr, warcraftelementstr, warcraftforcestr):
-		worldpara = [int(j) for j in re.subn(' +', ' ', worldparastr)[0].split(' ')]
+		worldpara = [int(j) for j in worldparastr.split()]
 		headquarterelementinit = worldpara[0]
 		citynum = worldpara[1]
 		maxtime = worldpara[2]
-		warcraftelement = [int(j) for j in re.subn(' +', ' ', warcraftelementstr)[0].split(' ')]
+		warcraftelement = [int(j) for j in warcraftelementstr.split()]
 		warcraftelementinit = {"dragon": warcraftelement[0], "ninja": warcraftelement[1], "iceman": warcraftelement[2], "lion": warcraftelement[3], "wolf": warcraftelement[4]}
-		warcraftforce = [int(j) for j in re.subn(' +', ' ', warcraftforcestr)[0].split(' ')]
+		warcraftforce = [int(j) for j in warcraftforcestr.split()]
 		warcraftforceinit = {"dragon": warcraftforce[0], "ninja": warcraftforce[1], "iceman": warcraftforce[2], "lion": warcraftforce[3], "wolf": warcraftforce[4]}		
 		self.__timer = Timer(maxtime)		
 		self.__redheadquarter = RedHeadQuarter(0, headquarterelementinit, warcraftelementinit, warcraftforceinit)
